@@ -5,7 +5,7 @@
       |
       <router-link to="/about">About</router-link>
       |
-      <router-link to="/posts/3">Post Info</router-link>
+      <router-link to="/posts/:id">Post Info</router-link>
       |
       <router-link v-if="!isLoggedIn()" to="/signup">Signup</router-link>
       |
