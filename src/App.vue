@@ -5,13 +5,15 @@
       |
       <router-link to="/about">About</router-link>
       |
-      <router-link to="/posts/:id">Post Info</router-link>
+      <router-link to="/posts/new">Add Post</router-link>
       |
       <router-link v-if="!isLoggedIn()" to="/signup">Signup</router-link>
       |
       <router-link v-if="!isLoggedIn()" to="/login">Login</router-link>
       |
       <router-link v-if="isLoggedIn()" to="/logout">Logout</router-link>
+      |
+      <router-link to="/users/:id">Profile</router-link>
     </div>
     <router-view />
   </div>
