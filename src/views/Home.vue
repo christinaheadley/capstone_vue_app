@@ -22,6 +22,12 @@
     <!-- <div v-for="tag in post.tags" v-bind:key="tag.id">
       <p>{{ post.tag.name }}</p> -->
 
+    <ul>
+      <li v-for="tag in tags" :key="tag.name">
+        {{ tag.name }}
+      </li>
+    </ul>
+
     <router-view />
     <!-- </div> -->
     <!-- </div> -->
@@ -44,33 +50,42 @@
 <script>
 import axios from "axios";
 import Vue2Filters from "vue2-filters";
+
 export default {
   mixins: [Vue2Filters.mixin],
   data: function() {
     return {
-      posts: [],
-      comment: {},
-      // post: {
-      tags: {
-        //     name: "",
-      },
-      // },
-      // user: {
-      //   name: [],
-      // },
-      // post_tags: [],
+      tags: ["` this.tagName `"],
 
-      // tagFilter: "corona",
+      // tags: [
+      //   { name: "pandemic" },
+      //   { name: "isolation" },
+      //   { name: "advice" },
+      //   { name: "vaccine" },
+      //   { name: "safety" },
+      //   { name: "work" },
+      //   { name: "family" },
+      //   { name: "anxiety" },
+      //   { name: "covid" },
+      // ],
+      posts: [],
     };
   },
+
   created: function() {
     this.indexPosts();
+    this.tagNames();
   },
   methods: {
     indexPosts: function() {
       axios.get("api/posts").then(response => {
         console.log(response.data);
         this.posts = response.data;
+      });
+    },
+    tagNames: function() {
+      this.tags.forEach(function(tag) {
+        console.log(tag.name);
       });
     },
   },
