@@ -12,12 +12,17 @@
         <p>{{ post.body }}</p>
         <img v-bind:src="post.image_url" class="" alt="" />
       </router-link>
-      <p>User: {{ post.user_id }}</p>
+
+      <p>
+        User: {{ post.user.user_name }}
+        <img v-bind:src="post.user.image_url" class="" alt="" />
+      </p>
       <!-- find a way to show user.user_name and image -->
       <!-- add router link to user info -->
       <!-- add click to add clap +1 -->
       <p>Claps: {{ post.claps }}</p>
       <!-- <p>Tags: {{ post.tags }}</p> -->
+      <!-- <p>Comment: {{ commentBody() }}</p> -->
     </div>
     <!-- <div v-for="tag in post.tags" v-bind:key="tag.id">
       <p>{{ post.tag.name }}</p> -->
@@ -35,12 +40,7 @@
 
     <!-- <button v:on-click="tagFilter" v-bind:key="post.id">{{ post.tag.name }}</button> -->
   </div>
-  <!-- <div>
-      <h2>{{ post.comment[0].title }}</h2>
-      <p>{{ post.comment[0].body }}</p>
-      <p>{{ post.comment[0].image_url }}</p>
-      <p>User: {{ post.comment[0].user_id.user_name }} {{ post.comment.user_id.image_url }}</p> <router-view>add router link to user info<router-view /> -->
-  <!-- <p>Claps: {{ post.comment[0].claps }}</p> -->
+
   <!-- add click to add clap +1 (need to create BE for this)-->
   <!-- edit and delete buttons for comment owner </div> -->
 </template>
@@ -50,12 +50,13 @@
 <script>
 import axios from "axios";
 import Vue2Filters from "vue2-filters";
+// import func from "vue-editor-bridge";
 
 export default {
   mixins: [Vue2Filters.mixin],
   data: function() {
     return {
-      tags: ["` this.tagName `"],
+      tags: [{ name: "` this.tagName `" }],
 
       // tags: [
       //   { name: "pandemic" },
@@ -75,6 +76,7 @@ export default {
   created: function() {
     this.indexPosts();
     this.tagNames();
+    // this.commentBody();
   },
   methods: {
     indexPosts: function() {
@@ -88,6 +90,13 @@ export default {
         console.log(tag.name);
       });
     },
+    // commentBody: function() {
+    //   if (this.post.comment.body == false) {
+    //     console.log(" ");
+    //   } else {
+    //     console.log("this.post.comment.body");
+    //   }
+    // },
   },
 };
 </script>

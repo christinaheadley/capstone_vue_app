@@ -3,7 +3,7 @@
     <h2>{{ post.title }}</h2>
     <p>{{ post.body }}</p>
     <img v-bind:src="post.image_url" class="" alt="" />
-    <p>User: {{ post.user_id }} {{ post.user_id }}</p>
+    <p>User: {{ post.user_id }}</p>
     <!-- <router-view>add router link to user info<router-view /> -->
     <p>Claps: {{ post.claps }}</p>
     <!-- add click to add clap +1 -->

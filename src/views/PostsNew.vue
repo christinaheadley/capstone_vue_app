@@ -20,7 +20,7 @@
         <label>Image:</label>
         <input type="text" class="form-control" v-model="image_url" />
       </div>
-
+      <!-- need to add category buttons to select tags for new Post -->
       <input type="submit" class="btn btn-primary" value="Submit" />
     </form>
   </div>
@@ -54,7 +54,8 @@ export default {
         .then(response => {
           console.log(response.data);
           this.$parent.flashMessage = "Post created!";
-          this.$router.push("/home");
+          this.$router.unshift("/home");
+          //flash message and unshift not working
         })
         .catch(error => {
           this.errors = error.response.data.errors;
