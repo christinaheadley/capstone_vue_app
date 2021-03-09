@@ -3,13 +3,21 @@
     <h2>{{ post.title }}</h2>
     <p>{{ post.body }}</p>
     <img v-bind:src="post.image_url" class="" alt="" />
-    <p>User: {{ post.user_id }}</p>
     <!-- <router-view>add router link to user info<router-view /> -->
+    <!-- user partial throws error on entire page -->
+    <!-- {{ post.user.user_name }} -->
+    {{ post.user_id }}
+    <!-- add user image -->
+    {{ post.tag }}
+    <p v-for="tag in post.tags" v-bind:key="tag.id">
+      {{ tag.name }}
+    </p>
     <p>Claps: {{ post.claps }}</p>
     <!-- add click to add clap +1 -->
     <!-- edit and delete buttons for post owner -->
+    <p v-if="post.comment">Comment: {{ post.comment.body }}</p>
+    <h2>{{ post.comment.body }}</h2>
     <!-- <div>
-      <h2>{{ comment.title }}</h2>
       <p>{{ comment.body }}</p>
       <p>{{ comment.image_url }}</p>
       <p>User: {{ comment.user_id.user_name }} {{ comment.user_id.image_url }}</p>

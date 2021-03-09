@@ -15,10 +15,10 @@
       |
       <router-link to="/users/:id">Profile</router-link>
     </div>
-    <div v-if="flashMessage">
+    <!-- <div v-if="flashMessage">
       {{ flashMessage }}
-      <button v-on:click="flashMessage = ''">Close</button>
-    </div>
+      <button v-on:click="flashMessage = ''">Close</button> -->
+    <!-- </div> -->
     <router-view />
   </div>
 </template>

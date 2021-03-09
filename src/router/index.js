@@ -38,14 +38,14 @@ const routes = [
     component: Signup,
   },
   {
-    path: "/posts/new",
-    name: "posts-new",
-    component: PostsNew,
-  },
-  {
     path: "/posts/:id",
     name: "posts-show",
     component: PostsShow,
+  },
+  {
+    path: "/posts/new",
+    name: "posts-new",
+    component: PostsNew,
   },
   {
     path: "/users/:id",

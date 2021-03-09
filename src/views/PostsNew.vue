@@ -53,7 +53,7 @@ export default {
         .post("/api/posts", params)
         .then(response => {
           console.log(response.data);
-          this.$parent.flashMessage = "Post created!";
+          // this.$parent.flashMessage = "Post created!";
           this.$router.unshift("/home");
           //flash message and unshift not working
         })
