@@ -13,12 +13,13 @@
       |
       <router-link v-if="isLoggedIn()" to="/logout">Logout</router-link>
       |
-      <router-link to="/users/:id">Profile</router-link>
+      <router-link to="`/users/${id}`">Profile</router-link>
+      <!-- <a :href="`/users/${getUserId()}`" v-if="isLoggedIn()">Profile</a> -->
     </div>
     <!-- <div v-if="flashMessage">
       {{ flashMessage }}
-      <button v-on:click="flashMessage = ''">Close</button> -->
-    <!-- </div> -->
+      <button v-on:click="flashMessage = ''">Close</button>
+    </div> -->
     <router-view />
   </div>
 </template>
@@ -47,9 +48,15 @@
 </style>
 <script>
 export default {
+  // data: function() {
+  //   return localStorage.jwt ? true : false;
+  // },
   methods: {
     isLoggedIn: function() {
       return localStorage.getItem("jwt");
+    },
+    getUserId: function() {
+      return localStorage.user_id;
     },
   },
 };

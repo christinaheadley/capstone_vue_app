@@ -19,10 +19,10 @@
         <p>{{ post.body }}</p>
         <img v-bind:src="post.image_url" class="" alt="" />
       </router-link>
-      <!-- <router-link :to="`/users/${id}`"> -->
-      <p>User: {{ post.user.user_name }}</p>
-      <img v-bind:src="post.user.image_url.url" class="" alt="" />
-      <!-- </router-link> -->
+      <router-link :to="`/users/${post.user.id}`">
+        <p>User: {{ post.user.user_name }}</p>
+        <img v-bind:src="post.user.image_url" class="" alt="" />
+      </router-link>
       <!-- find a way to show user.user_name and image -->
       <!-- add router link to user info -->
       <!-- add click to add clap +1 -->
@@ -76,7 +76,6 @@ export default {
   created: function() {
     this.indexPosts();
     this.tagNames();
-    // this.commentBody();
   },
   methods: {
     indexPosts: function() {
@@ -90,14 +89,6 @@ export default {
         console.log(tag.name);
       });
     },
-
-    // commentBody: function() {
-    //   if (this.post.comment.body == false) {
-    //     console.log(" ");
-    //   } else {
-    //     console.log("this.post.comment.body");
-    //   }
-    // },
   },
 };
 </script>

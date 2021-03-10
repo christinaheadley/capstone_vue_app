@@ -16,15 +16,9 @@
     <!-- add click to add clap +1 -->
     <!-- edit and delete buttons for post owner -->
     <p v-if="post.comment">Comment: {{ post.comment.body }}</p>
-    <h2>{{ post.comment.body }}</h2>
-    <!-- <div>
-      <p>{{ comment.body }}</p>
-      <p>{{ comment.image_url }}</p>
-      <p>User: {{ comment.user_id.user_name }} {{ comment.user_id.image_url }}</p>
-     <router-view>add router link to user info<router-view />
-      <p>Claps: {{ comment.claps }}</p>
-    </div> -->
-    <!-- add click to add clap +1 -->
+    <!-- <p>{{ comment.image_url }}</p>
+      <p>User: {{ comment.user_id.user_name }} {{ comment.user_id.image_url }}</p> -->
+    <!-- <router-view>add router link to user info<router-view /> -->
     <!-- edit and delete buttons for comment owner -->
   </div>
 </template>
@@ -36,14 +30,24 @@ import axios from "axios";
 export default {
   data: function() {
     return {
-      post: {},
+      post: {
+        user: {
+          user_name: "",
+        },
+      },
     };
   },
   created: function() {
-    axios.get(`/api/posts/${this.$route.params.id}`).then(response => {
-      console.log(response.data);
-      this.post = response.data;
-    });
+    axios
+      .get(`/api/posts/${this.$route.params.id}`)
+      .then(response => {
+        this.post = response.data;
+        console.log(response.data);
+      })
+      .catch(error => {
+        this.errors = error.response.data.errors;
+        this.status = error.response.status;
+      });
   },
   methods: {},
 };

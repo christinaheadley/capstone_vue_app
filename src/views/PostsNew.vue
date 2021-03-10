@@ -54,7 +54,7 @@ export default {
         .then(response => {
           console.log(response.data);
           // this.$parent.flashMessage = "Post created!";
-          this.$router.unshift("/home");
+          this.$router.push("/home");
           //flash message and unshift not working
         })
         .catch(error => {
