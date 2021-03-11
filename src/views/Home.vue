@@ -2,17 +2,12 @@
 <!-- prettier-ignore-start -->
 <template>
   <div class="home">
-    <!-- <div>
-      <button type="button" v-for="tag in tags" v-bind:key="tag.id">{{ tag.name }}"</button>
-    </div> -->
+    <h4>View by Category:</h4>
+    <div v-for="tag in tags" :key="tag.name">
+      <input type="radio" id="tag.name" name="tag" value="tag.name" />
+      <label for="tag.name">{{ tag.name }}</label>
+    </div>
     <!-- <div v-for="post in filterBy(posts, tagFilter, 'tags')" v-bind:key="post.name"> -->
-    <!-- <button v:on-click="tagFilter" v-bind:key="post.id">{{ post.tag.name }}</button> -->
-    <ul>
-      <li>{{ tagNames() }}</li>
-      <!-- <li v-for="tag in tags" :key="tag.name">
-        {{ tag.name }}
-      </li> -->
-    </ul>
     <div v-for="post in posts" v-bind:key="post.id">
       <router-link :to="`/posts/${post.id}`">
         <h2>{{ post.title }}</h2>
@@ -38,7 +33,6 @@
 
     <router-view />
     <!-- </div> -->
-    <!-- <div v-for="post.tag in filterBy(post.tags, filter)" v-bind:key="post.tag.id"></div> -->
   </div>
 
   <!-- add click to add clap +1 (need to create BE for this)-->
@@ -70,6 +64,7 @@ export default {
         { name: "covid" },
       ],
       posts: [],
+      tagFilter: "",
     };
   },
 
@@ -93,3 +88,4 @@ export default {
 };
 </script>
 <!-- prettier-ignore-end -->
+<!-- https://stackoverflow.com/questions/55477354/how-to-filter-an-array-in-vue-js-with-multiple-select-buttons-->
