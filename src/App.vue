@@ -13,8 +13,7 @@
       |
       <router-link v-if="isLoggedIn()" to="/logout">Logout</router-link>
       |
-      <router-link to="`/users/${id}`">Profile</router-link>
-      <!-- <a :href="`/users/${getUserId()}`" v-if="isLoggedIn()">Profile</a> -->
+      <router-link v-if="isLoggedIn()" :to="`/users/${getUserId()}`">Profile</router-link>
     </div>
     <!-- <div v-if="flashMessage">
       {{ flashMessage }}
@@ -48,9 +47,9 @@
 </style>
 <script>
 export default {
-  // data: function() {
-  //   return localStorage.jwt ? true : false;
-  // },
+  data: function() {
+    return localStorage.jwt ? true : false;
+  },
   methods: {
     isLoggedIn: function() {
       return localStorage.getItem("jwt");

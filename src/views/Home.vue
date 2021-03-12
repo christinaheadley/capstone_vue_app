@@ -3,12 +3,19 @@
 <template>
   <div class="home">
     <h4>View by Category:</h4>
-    <div v-for="tag in tags" :key="tag.name">
+    <!-- when add bootstrap, look at : https://www.w3schools.com/bootstrap/bootstrap_button_groups.asp -->
+    <div class="checkbox">
+      <div v-for="tag in tags" :key="tag.name">
+        <label for="tag.name">{{ tag.name }}</label>
+        <input type="checkbox" id="tag.name" name="tag" value="tag.name" />
+      </div>
+    </div>
+    <!-- <div v-for="tag in tags" :key="tag.name">
       <input type="radio" id="tag.name" name="tag" value="tag.name" />
       <label for="tag.name">{{ tag.name }}</label>
-    </div>
+    </div> -->
     <!-- <div v-for="post in filterBy(posts, tagFilter, 'tags')" v-bind:key="post.name"> -->
-    <div v-for="post in posts" v-bind:key="post.id">
+    <div v-for="post in posts.slice().reverse()" v-bind:key="post.id">
       <router-link :to="`/posts/${post.id}`">
         <h2>{{ post.title }}</h2>
         <p>{{ post.body }}</p>
@@ -18,8 +25,6 @@
         <p>User: {{ post.user.user_name }}</p>
         <img v-bind:src="post.user.image_url" class="" alt="" />
       </router-link>
-      <!-- find a way to show user.user_name and image -->
-      <!-- add router link to user info -->
       <!-- add click to add clap +1 -->
       <p>Claps: {{ post.claps }}</p>
 
@@ -52,17 +57,7 @@ export default {
     return {
       // tags: [{ name: "` this.tagName `" }],
       post: {},
-      tags: [
-        { name: "pandemic" },
-        { name: "isolation" },
-        { name: "advice" },
-        { name: "vaccine" },
-        { name: "safety" },
-        { name: "work" },
-        { name: "family" },
-        { name: "anxiety" },
-        { name: "covid" },
-      ],
+      tags: [],
       posts: [],
       tagFilter: "",
     };
@@ -70,7 +65,7 @@ export default {
 
   created: function() {
     this.indexPosts();
-    this.tagNames();
+    this.indexTags();
   },
   methods: {
     indexPosts: function() {
@@ -79,9 +74,10 @@ export default {
         this.posts = response.data;
       });
     },
-    tagNames: function() {
-      this.tags.forEach(function(tag) {
-        console.log(tag.name);
+    indexTags: function() {
+      axios.get("api/tags").then(response => {
+        console.log(response.data);
+        this.tags = response.data;
       });
     },
   },

@@ -18,7 +18,13 @@
       </div>
       <div class="form-group">
         <label>Image:</label>
-        <input type="text" class="form-control" v-model="image_url" />
+        <input type="text" class="form-control" v-model="imageUrl" />
+      </div>
+      <div class="form-group">
+        <div v-for="tag in tags" :key="tag.name">
+          <label for="tag.name">{{ tag.name }}</label>
+          <input type="checkbox" id="tag.name" name="tag" value="tag.name" />
+        </div>
       </div>
       <!-- need to add category buttons to select tags for new Post -->
       <input type="submit" class="btn btn-primary" value="Submit" />
@@ -34,33 +40,47 @@ export default {
     return {
       title: "",
       body: "",
-      image_url: "",
+      imageUrl: "",
       errors: [],
       status: "",
+      tags: [],
+      tag: {
+        name: "",
+      },
     };
   },
   created: function() {
-    this.indexTags();
+    this.tagNames();
   },
   methods: {
     createPost: function() {
-      var params = {
+      let params = {
         title: this.title,
         body: this.body,
-        image_url: this.image_url,
+        image_url: this.imageUrl,
+        tag: this.tag,
       };
       axios
         .post("/api/posts", params)
         .then(response => {
+          this.$router.push("/home");
           console.log(response.data);
           // this.$parent.flashMessage = "Post created!";
-          this.$router.push("/home");
           //flash message and unshift not working
         })
         .catch(error => {
           this.errors = error.response.data.errors;
           this.status = error.response.status;
         });
+    },
+    tagNames: function() {
+      this.tags.forEach(function(tag) {
+        console.log(tag.name);
+      });
+
+      // createPostTag: function() {
+      //   this.
+      // },
     },
   },
 };
