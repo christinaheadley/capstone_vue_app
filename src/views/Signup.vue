@@ -9,7 +9,7 @@
       </ul>
       <div class="form-group">
         <label>Name:</label>
-        <input type="text" class="form-control" v-model="name" />
+        <input type="text" class="form-control" v-model="userName" />
       </div>
       <div class="form-group">
         <label>Email:</label>
@@ -34,7 +34,7 @@ import axios from "axios";
 export default {
   data: function() {
     return {
-      name: "",
+      userName: "",
       email: "",
       password: "",
       passwordConfirmation: "",
@@ -44,7 +44,7 @@ export default {
   methods: {
     submit: function() {
       var params = {
-        name: this.name,
+        user_name: this.userName,
         email: this.email,
         password: this.password,
         password_confirmation: this.passwordConfirmation,

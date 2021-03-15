@@ -4,6 +4,8 @@
     <p>{{ user.email }}</p>
     <img v-bind:src="user.image_url" class="" alt="" />
     <p>{{ user.bio }}</p>
+    <button>Edit</button>
+    <button>Delete</button>
   </div>
 </template>
 
@@ -19,14 +21,17 @@ export default {
     };
   },
   created: function() {
-    axios.get(`/api/users/${this.$route.params.id}`).then(response => {
-      console.log(response.data);
-      this.user = response.data;
-      //   .catch(error => {
-      //     console.log(error.response);
-      //     // reroute to sign in:
-      //     this.errors = ["Unauthorized."];
-    });
+    axios
+      .get(`/api/users/${this.$route.params.id}`)
+      .then(response => {
+        console.log(response.data);
+        this.user = response.data;
+      })
+      .catch(error => {
+        console.log(error.response);
+        // reroute to sign in:
+        this.errors = ["Unauthorized."];
+      });
   },
   methods: {},
   // this.email = "";

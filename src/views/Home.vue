@@ -1,8 +1,5 @@
-/* eslint-disable vue/valid-v-for */ /* eslint-disable */
-<!-- prettier-ignore-start -->
 <template>
   <div class="home">
-    <h4>View by Category:</h4>
     <!-- when add bootstrap, look at : https://www.w3schools.com/bootstrap/bootstrap_button_groups.asp -->
     <div class="checkbox">
       <div v-for="tag in tags" :key="tag.name">
@@ -10,18 +7,24 @@
         <input type="checkbox" id="tag.name" name="tag" value="tag.name" />
       </div>
     </div>
-    <!-- <div v-for="tag in tags" :key="tag.name">
-      <input type="radio" id="tag.name" name="tag" value="tag.name" />
-      <label for="tag.name">{{ tag.name }}</label>
-    </div> -->
-    <!-- <div v-for="post in filterBy(posts, tagFilter, 'tags')" v-bind:key="post.name"> -->
-    <div v-for="post in posts.slice().reverse()" v-bind:key="post.id">
+    <!-- buttons not working:
+    <button v-on:click="sortAttribute = 'posts'"><h4>Most Recent:</h4></button>
+    <button v-on:click="sortAttribute = 'claps'"><h4>Most Popular:</h4></button>
+    <button v-on:click="sortAttribute = 'user_id'"><h4>Most Popular:</h4></button>
+    <div v-for="post in posts.slice().reverse()" v-bind:key="post.id"> -->
+    <div v-for="post in orderBy(filterBy(posts.slice().reverse(), postFilter), sortAttribute)" v-bind:key="post.id">
       <router-link :to="`/posts/${post.id}`">
         <h2>{{ post.title }}</h2>
         <p>{{ post.body }}</p>
         <img v-bind:src="post.image_url" class="" alt="" />
       </router-link>
       <router-link :to="`/users/${post.user.id}`">
+        <!-- <div v-if="post.user_id == $parent.getUserUd()">
+          <router-link :to="`/post/${post.id}/edit`">
+            <button>Edit Post</button>
+          </router-link>
+          <button v-on:click="destroyPost()">Delete</button>
+        </div> -->
         <p>User: {{ post.user.user_name }}</p>
         <img v-bind:src="post.user.image_url" class="" alt="" />
       </router-link>
@@ -55,11 +58,11 @@ export default {
   mixins: [Vue2Filters.mixin],
   data: function() {
     return {
-      // tags: [{ name: "` this.tagName `" }],
       post: {},
       tags: [],
       posts: [],
       tagFilter: "",
+      postFilter: "",
     };
   },
 
@@ -83,5 +86,5 @@ export default {
   },
 };
 </script>
-<!-- prettier-ignore-end -->
+
 <!-- https://stackoverflow.com/questions/55477354/how-to-filter-an-array-in-vue-js-with-multiple-select-buttons-->

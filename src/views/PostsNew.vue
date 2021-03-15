@@ -50,7 +50,7 @@ export default {
     };
   },
   created: function() {
-    this.tagNames();
+    this.indexTags();
   },
   methods: {
     createPost: function() {
@@ -58,7 +58,6 @@ export default {
         title: this.title,
         body: this.body,
         image_url: this.imageUrl,
-        tag: this.tag,
       };
       axios
         .post("/api/posts", params)
@@ -73,14 +72,9 @@ export default {
           this.status = error.response.status;
         });
     },
-    tagNames: function() {
-      this.tags.forEach(function(tag) {
-        console.log(tag.name);
-      });
-
-      // createPostTag: function() {
-      //   this.
-      // },
+    indexTags: function() {
+      axios.get("/api/tags").then(response => (this.tags = response.data));
+      console.log(this.tags);
     },
   },
 };

@@ -6,6 +6,8 @@
       <router-link to="/about">About</router-link>
       |
       <router-link to="/posts/new">Add Post</router-link>
+      <!-- |
+      <router-link to="/posts/:id/edit">Edit Post</router-link> -->
       |
       <router-link v-if="!isLoggedIn()" to="/signup">Signup</router-link>
       |
