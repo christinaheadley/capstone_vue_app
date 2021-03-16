@@ -17,10 +17,10 @@
       |
       <router-link v-if="isLoggedIn()" :to="`/users/${getUserId()}`">Profile</router-link>
     </div>
-    <!-- <div v-if="flashMessage">
+    <div v-if="flashMessage">
       {{ flashMessage }}
       <button v-on:click="flashMessage = ''">Close</button>
-    </div> -->
+    </div>
     <router-view />
   </div>
 </template>
@@ -50,11 +50,13 @@
 <script>
 export default {
   data: function() {
-    return localStorage.jwt ? true : false;
+    return {
+      flashMessage: "",
+    };
   },
   methods: {
     isLoggedIn: function() {
-      return localStorage.getItem("jwt");
+      return localStorage.jwt ? true : false;
     },
     getUserId: function() {
       return localStorage.user_id;

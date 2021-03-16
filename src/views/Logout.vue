@@ -10,6 +10,7 @@ export default {
     delete axios.defaults.headers.common["Authorization"];
     localStorage.removeItem("jwt");
     localStorage.removeItem("user_id");
+    this.$parent.flashMessage = "Logout Successful";
     this.$router.push("/");
   },
 };

@@ -7,7 +7,9 @@ import Logout from "../views/Logout.vue";
 import Signup from "../views/Signup.vue";
 import PostsNew from "../views/PostsNew.vue";
 import PostsShow from "../views/PostsShow.vue";
+import PostsEdit from "../views/PostsEdit.vue";
 import UsersShow from "../views/UsersShow.vue";
+import UsersEdit from "../views/UsersEdit.vue";
 
 Vue.use(VueRouter);
 
@@ -47,15 +49,20 @@ const routes = [
     name: "posts-show",
     component: PostsShow,
   },
-  // {
-  //   path: "/posts/:id",
-  //   name: "posts-edit",
-  //   component: PostsEdit,
-  // },
+  {
+    path: "/posts/:id/edit",
+    name: "posts-edit",
+    component: PostsEdit,
+  },
   {
     path: "/users/:id",
     name: "users-show",
     component: UsersShow,
+  },
+  {
+    path: "/users/:id/edit",
+    name: "users-edit",
+    component: UsersEdit,
   },
 ];
 

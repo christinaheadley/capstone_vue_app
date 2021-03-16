@@ -53,8 +53,8 @@ export default {
         .post("/api/users", params)
         .then(response => {
           console.log(response.data);
+          this.$parent.flashMessage = "Signup Successful";
           this.$router.push("/login");
-          alert("Signup successful");
         })
         .catch(error => {
           this.errors = error.response.data.errors;

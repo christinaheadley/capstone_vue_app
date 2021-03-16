@@ -4,8 +4,12 @@
     <p>{{ user.email }}</p>
     <img v-bind:src="user.image_url" class="" alt="" />
     <p>{{ user.bio }}</p>
-    <button>Edit</button>
-    <button>Delete</button>
+    <div v-if="user.id == $parent.getUserId()">
+      <router-link :to="`/users/${user.id}/edit`">
+        <button>Edit Profile</button>
+      </router-link>
+      <button v-on:click="destroyUser()">Delete</button>
+    </div>
   </div>
 </template>
 

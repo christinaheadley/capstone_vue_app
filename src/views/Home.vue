@@ -3,8 +3,8 @@
     <!-- when add bootstrap, look at : https://www.w3schools.com/bootstrap/bootstrap_button_groups.asp -->
     <div class="checkbox">
       <div v-for="tag in tags" :key="tag.name">
-        <label for="tag.name">{{ tag.name }}</label>
         <input type="checkbox" id="tag.name" name="tag" value="tag.name" />
+        <label for="tag.name">{{ tag.name }}</label>
       </div>
     </div>
     <!-- buttons not working:
@@ -17,25 +17,35 @@
         <h2>{{ post.title }}</h2>
         <p>{{ post.body }}</p>
         <img v-bind:src="post.image_url" class="" alt="" />
-      </router-link>
-      <router-link :to="`/users/${post.user.id}`">
-        <!-- <div v-if="post.user_id == $parent.getUserUd()">
-          <router-link :to="`/post/${post.id}/edit`">
+        <div v-if="post.user_id == $parent.getUserId()">
+          <router-link :to="`/posts/${post.id}/edit`">
             <button>Edit Post</button>
           </router-link>
           <button v-on:click="destroyPost()">Delete</button>
-        </div> -->
+        </div>
+      </router-link>
+      <!-- <div v-if="post.user_id == $parent.getUserId()">
+        <button>Edit Post</button>
+        <router-link :to="`/post/${post.id}/edit`"></router-link>
+        <button v-on:click="destroyPost()">Delete</button>
+      </div> -->
+      <router-link :to="`/users/${post.user.id}`">
         <p>User: {{ post.user.user_name }}</p>
         <img v-bind:src="post.user.image_url" class="" alt="" />
       </router-link>
       <!-- add click to add clap +1 -->
       <p>Claps: {{ post.claps }}</p>
 
-      <p v-if="post.comment">Comment: {{ post.comment.body }}</p>
       <div v-if="post.tags">
         <div v-for="tag in post.tags" v-bind:key="tag.id">
           {{ tag.name }}
         </div>
+      </div>
+      <button>Add Comment</button>
+      <div v-if="post.comment">
+        Comment: {{ post.comment.body }}
+        <!-- {{ post.comments.user.image_url }} -->
+        <!-- {{ post.comments.user.user_name }} -->
       </div>
     </div>
 
