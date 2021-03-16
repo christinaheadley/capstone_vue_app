@@ -15,19 +15,17 @@
     </div>
     <p>Claps: {{ post.claps }}</p>
     <!-- add click to add clap +1 -->
-    <!-- edit and delete buttons for post owner -->
+
     <div>
       <router-link :to="`/users/${post.user.id}`">
         <p>User: {{ post.user.user_name }}</p>
         <img v-bind:src="post.user.image_url" class="" alt="" />
       </router-link>
-      <!-- START HERE -->
     </div>
-    <p v-if="post.comment">Comment: {{ post.comment.body }}</p>
-    <!-- <p>{{ comment.image_url }}</p>
-      <p>User: {{ comment.user_id.user_name }} {{ comment.user_id.image_url }}</p> -->
-    <!-- <router-view>add router link to user info<router-view /> -->
-    <!-- edit and delete buttons for comment owner -->
+    <div v-for="comment in post.comments" v-bind:key="comment.id">
+      Comment: {{ comment.body }} Commenter: {{ comment.user.user_name }}
+      <img v-bind:src="comment.user.image_url" class="" alt="" />
+    </div>
   </div>
 </template>
 

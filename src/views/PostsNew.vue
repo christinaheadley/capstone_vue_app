@@ -25,10 +25,8 @@
           <input type="checkbox" id="tag.name" name="tag" :value="tag.id" v-model="selectedTagIds" />
           <label for="tag.name">{{ tag.name }}</label>
         </div>
-        <span>Checked tag ids: {{ selectedTagIds }}</span>
       </div>
 
-      <!-- need to add category buttons to select tags for new Post -->
       <input type="submit" class="btn btn-primary" value="Submit" />
     </form>
   </div>
@@ -66,10 +64,9 @@ export default {
       axios
         .post("/api/posts", params)
         .then(response => {
+          this.$parent.flashMessage = "Post created!";
           this.$router.push("/");
           console.log(response.data);
-          // this.$parent.flashMessage = "Post created!";
-          //flash message and unshift not working
         })
         .catch(error => {
           this.errors = error.response.data.errors;

@@ -17,11 +17,11 @@
       </div>
       <div class="form-group">
         <label>Password:</label>
-        <input type="password" class="form-control" v-model="password" />
+        <input type="password" class="form-control" v-model="user.password" />
       </div>
       <div class="form-group">
         <label>Confirm Password:</label>
-        <input type="password" class="form-control" v-model="password_confirmation" />
+        <input type="password" class="form-control" v-model="user.password_confirmation" />
       </div>
       <div class="form-group">
         <label>Bio:</label>
@@ -66,9 +66,8 @@ export default {
         .patch(`/api/users/${this.user.id}`, params)
         .then(response => {
           console.log(response.data);
+          this.$parent.flashMessage = "Profile successfully updated!";
           this.$router.push(`/users/${this.user.id}`);
-          // this.$parent.flashMessage = "Post created!";
-          //flash message and unshift not working
         })
         .catch(error => {
           this.errors = error.response.data.errors;
@@ -80,6 +79,7 @@ export default {
         if (confirm("Do you want to delete your profile?")) {
           axios.delete(`api/users/${this.user.id}`).then(response => {
             console.log(response.data);
+            this.$parent.flashMessage = "Profile successfully deleted!";
             this.$router.push("/");
             // enter logout stuff here
           });

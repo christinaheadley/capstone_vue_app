@@ -24,11 +24,6 @@
           <button v-on:click="destroyPost()">Delete</button>
         </div>
       </router-link>
-      <!-- <div v-if="post.user_id == $parent.getUserId()">
-        <button>Edit Post</button>
-        <router-link :to="`/post/${post.id}/edit`"></router-link>
-        <button v-on:click="destroyPost()">Delete</button>
-      </div> -->
       <router-link :to="`/users/${post.user.id}`">
         <p>User: {{ post.user.user_name }}</p>
         <img v-bind:src="post.user.image_url" class="" alt="" />
@@ -42,11 +37,11 @@
         </div>
       </div>
       <button>Add Comment</button>
-      <div v-if="post.comment">
+      <template v-if="post.comment">
         Comment: {{ post.comment.body }}
-        <!-- {{ post.comments.user.image_url }} -->
-        <!-- {{ post.comments.user.user_name }} -->
-      </div>
+
+        pic:{{ post.comment.user }} name: {{ post.comment.user }}
+      </template>
     </div>
 
     <router-view />
