@@ -21,7 +21,7 @@
       {{ flashMessage }}
       <button v-on:click="flashMessage = ''">Close</button>
     </div>
-    <router-view />
+    <router-view :key="$route.fullPath" />
   </div>
 </template>
 

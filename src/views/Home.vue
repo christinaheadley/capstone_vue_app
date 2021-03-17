@@ -7,24 +7,24 @@
         <label for="tag.name">{{ tag.name }}</label>
       </div>
     </div>
-    <!-- <div> -->
-    <!-- <button v-on:click="setSortAttribute(created_at)">Sort by date</button> -->
-    <!-- <button v-on:click="sortAttribute = created_at">Sort by date</button> -->
-    <!-- <button v-on:click="setSortAttribute(post.claps)">Sort by popularity</button> -->
-    <!-- </div> -->
-    <!-- <div v-for="post in orderBy(posts, sortAttibute)" v-bind:key="post.id"> -->
-    <div v-for="post in orderBy(posts, 'created_at', -1)" v-bind:key="post.id">
+    <div>
+      <button
+        v-on:click="
+          sortAttribute = 'created_at';
+          sortOrder = -1;
+        "
+      >
+        Sort by date
+      </button>
+      <button v-on:click="sortAttribute = 'claps'">Sort by popularity</button>
+    </div>
+    <div v-for="post in orderBy(posts, sortAttribute, sortOrder)" v-bind:key="post.id">
       <router-link :to="`/posts/${post.id}`">
         <h2>{{ post.title }}</h2>
         <p>{{ post.body }}</p>
         <img v-bind:src="post.image_url" class="" alt="" />
       </router-link>
-      Claps: {{ post.claps.length }}
-      <!-- <form v-on:submit.prevent="upvotePost()">
-      </form> -->
-      <div class="form-group">
-        <input type="submit" id="clap.id" value="Add Clap" v-bind="upvotePost()" />
-      </div>
+      Claps: {{ post.claps }}
       <div v-if="post.user_id == $parent.getUserId()">
         <router-link :to="`/posts/${post.id}/edit`">
           <button>Edit Post</button>
@@ -47,7 +47,10 @@
         Comment: {{ post.comment.body }}
         <p v-if="post.comment.user">name:{{ post.comment.user.user_name }} pic: {{ post.comment.user.image_url }}</p>
       </div>
-
+      <div v-for="comment in post.comments" v-bind:key="comment.id">
+        Comment: {{ comment.body }} Commenter: {{ comment.user.user_name }} Commenter pic:
+        <img v-bind:src="comment.user.image_url" class="" alt="" />
+      </div>
       <router-view />
     </div>
   </div>
@@ -71,13 +74,13 @@ export default {
       tags: [],
       posts: [],
       sortAttribute: "created_at",
+      sortOrder: 1,
     };
   },
 
   created: function() {
     this.indexPosts();
     this.indexTags();
-    // this.upvotePost();
   },
   methods: {
     indexPosts: function() {
@@ -96,16 +99,6 @@ export default {
     },
     setSortAttribute: function(attribute) {
       this.sortAttribute = attribute;
-    },
-    upvotePost: function() {
-      let params = {
-        user_id: this.$parent.getUserId(),
-        post_id: this.postId,
-      };
-      axios.post("/api/claps", params).then(response => {
-        this.claps = response.data;
-        console.log(this.claps);
-      });
     },
   },
 };
