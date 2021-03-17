@@ -7,13 +7,13 @@
     <p v-for="tag in post.tags" v-bind:key="tag.id">
       {{ tag.name }}
     </p>
+    <p>Claps: {{ post.claps }}</p>
     <div v-if="post.user_id == $parent.getUserId()">
       <router-link :to="`/posts/${post.id}/edit`">
         <button>Edit Post</button>
       </router-link>
       <button v-on:click="destroyPost()">Delete</button>
     </div>
-    <p>Claps: {{ post.claps }}</p>
     <!-- add click to add clap +1 -->
 
     <div>
@@ -23,7 +23,7 @@
       </router-link>
     </div>
     <div v-for="comment in post.comments" v-bind:key="comment.id">
-      Comment: {{ comment.body }} Commenter: {{ comment.user.user_name }}
+      Comment: {{ comment.body }} Commenter: {{ comment.user.user_name }} Commenter pic:
       <img v-bind:src="comment.user.image_url" class="" alt="" />
     </div>
   </div>

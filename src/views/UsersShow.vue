@@ -1,7 +1,7 @@
 <template>
   <div class="users-show">
     <h2>{{ user.user_name }}</h2>
-    <p>{{ user.email }}</p>
+    <p v-if="user.id == $parent.getUserId()">{{ user.email }}</p>
     <img v-bind:src="user.image_url" class="" alt="" />
     <p>{{ user.bio }}</p>
     <div v-if="user.id == $parent.getUserId()">
