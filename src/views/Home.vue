@@ -3,7 +3,7 @@
     <img src="../../src/assets/images/Social_RecoverWe_logo.png" />
     <!-- when add bootstrap, look at : https://www.w3schools.com/bootstrap/bootstrap_button_groups.asp -->
     <div class="checkbox">
-      <div v-for="tag in tags" :key="tag.name">
+      <div v-for="tag in tags" v-bind="tag.name" :key="tag.name">
         <input type="checkbox" id="tag.name" name="tag" value="tag.name" />
         <label for="tag.name">{{ tag.name }}</label>
       </div>
@@ -17,47 +17,70 @@
       >
         Sort by date
       </button>
-      <button v-on:click="sortAttribute = 'claps'">Sort by popularity</button>
+      <button
+        v-on:click="
+          sortAttribute = 'claps';
+          sortOrder = -1;
+        "
+      >
+        Sort by popularity
+      </button>
     </div>
-    <div v-for="post in orderBy(posts, sortAttribute, sortOrder)" v-bind:key="post.id">
+    <div v-for="post in orderBy(filterBy(posts, filter), sortAttribute, sortOrder)" v-bind:key="post.id">
+      <!-- <div v-for="post in orderBy(posts, sortAttribute, sortOrder)" v-bind:key="post.id"> -->
       <router-link :to="`/posts/${post.id}`">
         <h2>{{ post.title }}</h2>
         <p>{{ post.body }}</p>
         <img v-bind:src="post.image_url" class="" alt="" />
       </router-link>
       Claps: {{ post.claps }}
+      <button v-on:click="addClap()">Clap</button>
       <div v-if="post.user_id == $parent.getUserId()">
         <router-link :to="`/posts/${post.id}/edit`">
           <button>Edit Post</button>
         </router-link>
-        <button v-on:click="destroyPost()">Delete</button>
+        <button v-on:click="$parent.destroyPost()">Delete</button>
       </div>
       <router-link :to="`/users/${post.user.id}`">
         <p>User: {{ post.user.user_name }}</p>
         <img v-bind:src="post.user.image_url" class="" alt="" />
       </router-link>
-      <!-- add click to add clap +1 -->
-
       <div v-if="post.tags">
         <div v-for="tag in post.tags" v-bind:key="tag.id">
           {{ tag.name }}
         </div>
       </div>
-      <button>Add Comment</button>
       <div v-if="post.comment">
         Comment: {{ post.comment.body }}
         <p v-if="post.comment.user">
           name:{{ post.comment.user.user_name }} pic:
           <img v-bind:src="post.comment.user.image_url" class="" alt="" />
-          <!-- {{ post.comment.user.image_url }}</p> -->
         </p>
       </div>
-
       <div v-for="comment in post.comments" v-bind:key="comment.id">
         Comment: {{ comment.body }} Commenter: {{ comment.user.user_name }} Commenter pic:
         <img v-bind:src="comment.user.image_url" class="" alt="" />
       </div>
-      <router-view />
+      <button>Add Comment</button>
+      <p v-if="!$parent.isLoggedIn()">Please log in!</p>
+      <form v-on:submit.prevent="$parent.createComment()">
+        <p>New Comment:</p>
+        <ul>
+          <li class="text-danger" v-for="error in errors" v-bind:key="error">
+            {{ error }}
+          </li>
+        </ul>
+        <div class="form-group">
+          <label>Text:</label>
+          <input type="text" class="form-control" v-model="body" />
+        </div>
+        <div class="form-group">
+          <label>Image:</label>
+          <input type="text" class="form-control" v-model="imageUrl" />
+        </div>
+        <input type="submit" class="btn btn-primary" value="Submit" />
+        <router-view />
+      </form>
     </div>
   </div>
 
@@ -80,7 +103,10 @@ export default {
       tags: [],
       posts: [],
       sortAttribute: "created_at",
-      sortOrder: 1,
+      sortOrder: -1,
+      checked: "",
+      body: "",
+      imageUrl: "",
     };
   },
 
@@ -93,8 +119,6 @@ export default {
       axios.get("api/posts").then(response => {
         console.log(response.data);
         this.posts = response.data;
-        // .then(response => {
-        //   this.posts = response.data.items ? response.data.items : [];
       });
     },
     indexTags: function() {
@@ -105,6 +129,16 @@ export default {
     },
     setSortAttribute: function(attribute) {
       this.sortAttribute = attribute;
+    },
+    // getCurrentPost: function() {
+    //   return this.post.id;
+    // },
+    addClap: function() {
+      axios.post(`/api/posts/${this.post.id}/clap`).then(response => {
+        console.log(response.data);
+        this.$parent.flashMessage = "Clap added!";
+        this.$router("`/api/posts/${this.post.id}`");
+      });
     },
   },
 };

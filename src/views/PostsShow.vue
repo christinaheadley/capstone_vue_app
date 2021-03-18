@@ -13,8 +13,9 @@
       <router-link :to="`/posts/${post.id}/edit`">
         <button>Edit Post</button>
       </router-link>
-      <button v-on:click="destroyPost()">Delete</button>
+      <button v-on:click="$parent.destroyPost()">Delete</button>
     </div>
+    <button v-on:click="addClap()">Clap</button>
     <!-- add click to add clap +1 -->
 
     <div>
@@ -27,6 +28,26 @@
       Comment: {{ comment.body }} Commenter: {{ comment.user.user_name }} Commenter pic:
       <img v-bind:src="comment.user.image_url" class="" alt="" />
     </div>
+    <button>Add Comment</button>
+    <p v-if="!$parent.isLoggedIn()">Please log in!</p>
+    <form v-on:submit.prevent="createComment()">
+      <p>New Comment:</p>
+      <ul>
+        <li class="text-danger" v-for="error in errors" v-bind:key="error">
+          {{ error }}
+        </li>
+      </ul>
+      <div class="form-group">
+        <label>Text:</label>
+        <input type="text" class="form-control" v-model="body" />
+      </div>
+      <div class="form-group">
+        <label>Image:</label>
+        <input type="text" class="form-control" v-model="imageUrl" />
+      </div>
+      <input type="submit" class="btn btn-primary" value="Submit" />
+      <router-view />
+    </form>
   </div>
 </template>
 
@@ -42,6 +63,10 @@ export default {
           user_name: "",
         },
       },
+      body: "",
+      imageUrl: "",
+      // post_id: `${this.post.id}`,
+      errors: [],
     };
   },
   created: function() {
@@ -57,13 +82,32 @@ export default {
       });
   },
   methods: {
-    destroyPost: function() {
-      if (confirm("Do you want to delete this post?")) {
-        axios.delete(`api/posts/${this.post.id}`).then(response => {
+    createComment: function() {
+      let params = {
+        body: this.body,
+        image_url: this.imageUrl,
+        //  to create comment, need to figure this out so comment attaches to correct post
+        // post_id: this.getCurrentPost(),
+      };
+      axios
+        .post("/api/comments", `${this.post.id}`, params)
+        .then(response => {
           console.log(response.data);
-          this.$router.push("/posts");
+          this.$parent.flashMessage = "Comment created!";
+          this.$router("/");
+        })
+        .catch(error => {
+          this.errors = error.response.data.errors;
+          this.status = error.response.status;
         });
-      }
+    },
+    addClap: function() {
+      axios.post(`/api/posts/${this.post.id}/clap`).then(response => {
+        console.log(response.data);
+        this.$parent.flashMessage = "Clap added!";
+        this.$router.push("/");
+        // (`/posts/${this.post.id}`);
+      });
     },
   },
 };

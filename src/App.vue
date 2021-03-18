@@ -48,7 +48,7 @@
 }
 </style>
 <script>
-// import axios from "axios";
+import axios from "axios";
 export default {
   data: function() {
     return {
@@ -62,6 +62,33 @@ export default {
     },
     getUserId: function() {
       return localStorage.user_id;
+    },
+    createComment: function() {
+      let params = {
+        body: this.body,
+        image_url: this.imageUrl,
+        //  to create comment, need to figure this out so comment attaches to correct post
+        // post_id: this.getCurrentPost(),
+      };
+      axios
+        .post("/api/comments", this.getCurrentPost(), params)
+        .then(response => {
+          this.$parent.flashMessage = "Comment created!";
+          this.$router("/");
+          console.log(response.data);
+        })
+        .catch(error => {
+          this.errors = error.response.data.errors;
+          this.status = error.response.status;
+        });
+    },
+    destroyPost: function() {
+      if (confirm("Do you want to delete this post?")) {
+        axios.delete(`api/posts/${this.post.id}`).then(response => {
+          console.log(response.data);
+          this.$router.push("/");
+        });
+      }
     },
   },
 };
