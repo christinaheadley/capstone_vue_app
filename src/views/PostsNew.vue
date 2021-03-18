@@ -1,5 +1,6 @@
 <template>
   <div class="posts-new">
+    <img src="../../src/assets/images/Social_RecoverWe_logo.png" />
     <p v-if="!$parent.isLoggedIn()">Please log in!</p>
     <form v-on:submit.prevent="createPost()">
       <h1>New Post:</h1>

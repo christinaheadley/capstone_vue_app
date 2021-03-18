@@ -1,5 +1,6 @@
 <template>
   <div class="signup">
+    <img src="../../src/assets/images/Social_RecoverWe_logo.png" />
     <form v-on:submit.prevent="submit()">
       <h1>Signup</h1>
       <ul>

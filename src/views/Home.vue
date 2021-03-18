@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <img src="../../src/assets/images/Social_RecoverWe_logo.png" />
     <!-- when add bootstrap, look at : https://www.w3schools.com/bootstrap/bootstrap_button_groups.asp -->
     <div class="checkbox">
       <div v-for="tag in tags" :key="tag.name">
@@ -45,8 +46,13 @@
       <button>Add Comment</button>
       <div v-if="post.comment">
         Comment: {{ post.comment.body }}
-        <p v-if="post.comment.user">name:{{ post.comment.user.user_name }} pic: {{ post.comment.user.image_url }}</p>
+        <p v-if="post.comment.user">
+          name:{{ post.comment.user.user_name }} pic:
+          <img v-bind:src="post.comment.user.image_url" class="" alt="" />
+          <!-- {{ post.comment.user.image_url }}</p> -->
+        </p>
       </div>
+
       <div v-for="comment in post.comments" v-bind:key="comment.id">
         Comment: {{ comment.body }} Commenter: {{ comment.user.user_name }} Commenter pic:
         <img v-bind:src="comment.user.image_url" class="" alt="" />

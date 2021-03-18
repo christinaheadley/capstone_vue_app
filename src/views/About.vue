@@ -1,82 +1,37 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <img src="../../src/assets/images/Social_RecoverWe_logo.png" />
+    <h1>Social Reintegration after COVID</h1>
+    <p>
+      Isolation and distancing have been part of our lives whether we wanted to or not. Fear of infection from strangers
+      isn’t just for germaphobes anymore. Like a divorcée trying a dating app, we may find our social skills are a bit
+      rusty!
+    </p>
+    <p>
+      The goal of this site is to help us, wherever we may be, work towards safe and intentional social interaction.
+      Humans evolved as a social species. And while some of us prefer less company, no one can do it all alone.
+    </p>
+    <p>
+      This site isn't about pretty pictures. It's a place where you can build a safe community and share your fears,
+      suggestions, and successes. All of you is welcome here!
+    </p>
+    <blockquote
+      cite="https://www.cdc.gov/aging/publications/features/lonely-older-adults.html#:~:text=Health%20Risks%20of%20Loneliness&text=Recent%20studies%20found%20that%3A,percent%20increased%20risk%20of%20dementia."
+    >
+      Recent studies found that: Social isolation significantly increased a person's risk of premature death from all
+      causes, a risk that may rival those of smoking, obesity, and physical inactivity.
+    </blockquote>
+    <p>According to the CDC, Immigrants, pueer people, and older people are at higher risk of lonliness.</p>
   </div>
 </template>
+<style></style>
 
-<!-- <div class="home"> -->
-<!-- <div v-for="post in filterBy(posts, tagFilter, 'tags')" v-bind:key="post.name"> -->
-<!-- <div v-for="post in posts" v-bind:key="post.id">
-      <router-link :to="`/posts/${post.id}`">
-        <h2>{{ post.title }}</h2>
-        <p>{{ post.body }}</p>
-        <img v-bind:src="post.image_url" class="" alt="" />
-      </router-link>
-      <p>User: {{ post.user_id }}</p> -->
-<!-- find a way to show user.user_name and image -->
-<!-- add router link to user info -->
-<!-- add click to add clap +1 -->
-<!-- <p>Claps: {{ post.claps }}</p> -->
-<!-- make a loop to get tag names only -->
-<!-- <div v-for="tag in tags" v-bind:key="tag.id"> -->
-<!-- <p>Tags: {{ post.tag.name }}</p>
-      </div>
-      <router-view /> -->
-<!-- </div> -->
-<!-- <div v-for="tag in tags" v-bind:key="tag.name">
-      <p>{{ tag.name }}</p> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- <div v-for="post.tag in filterBy(post.tags, filter)" v-bind:key="post.tag.id"></div> -->
-
-<!-- <button v:on-click="tagFilter" v-bind:key="post.id">{{ post.tag.name }}</button> -->
-<!-- </div> -->
-<!-- <div>
-      <h2>{{ post.comment[0].title }}</h2>
-      <p>{{ post.comment[0].body }}</p>
-      <p>{{ post.comment[0].image_url }}</p>
-      <p>User: {{ post.comment[0].user_id.user_name }} {{ post.comment.user_id.image_url }}</p> <router-view>add router link to user info<router-view /> -->
-<!-- <p>Claps: {{ post.comment[0].claps }}</p> -->
-<!-- add click to add clap +1 (need to create BE for this)-->
-<!-- edit and delete buttons for comment owner </div> -->
-
-<!-- <script>
-// import axios from "axios";
-// import Vue2Filters from "vue2-filters";
+// //
+<script>
 // export default {
-//   mixins: [Vue2Filters.mixin],
-//   data: function() {
-//     return {
-//       post: {
-//         tag: {
-//           name: "",
-//         },
-//       }, 
-// comment: {},
-
-// tagFilter: "corona",
-//   };
-// },
-//   created: function() {
-//     this.indexTags();
-//     this.indexPosts();
-//   },
-//   methods: {
-//     indexPosts: function() {
-//       axios.get("api/posts").then(response => {
-//         console.log(response.data);
-//         this.posts = response.data;
-//       });
-//     },
-
-//     indexTags: function() {
-//       axios.get("api/tags").then(response => {
-//         console.log(response.data);
-//         this.tags = response.data;
-//       });
-//     },
+//   data: {
+//     image: "/src/assets/images/Social_RecoverWe_logo.png",
 //   },
 // };
 //
 </script>
--->

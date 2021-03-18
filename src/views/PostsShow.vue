@@ -1,5 +1,6 @@
 <template>
   <div class="posts-show">
+    <img src="../../src/assets/images/Social_RecoverWe_logo.png" />
     <h2>{{ post.title }}</h2>
     <p>{{ post.body }}</p>
     <img v-bind:src="post.image_url" class="" alt="" />
