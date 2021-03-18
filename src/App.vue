@@ -82,14 +82,14 @@ export default {
           this.status = error.response.status;
         });
     },
-    destroyPost: function() {
-      if (confirm("Do you want to delete this post?")) {
-        axios.delete(`api/posts/${this.post.id}`).then(response => {
-          console.log(response.data);
-          this.$router.push("/");
-        });
-      }
-    },
+    // destroyPost: function() {
+    //   if (confirm("Do you want to delete this post?")) {
+    //     axios.delete(`api/posts/${this.post.id}`).then(response => {
+    //       console.log(response.data);
+    //       this.$router.push("/");
+    //     });
+    //   }
+    // },
   },
 };
 </script>

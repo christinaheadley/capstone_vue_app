@@ -27,19 +27,18 @@
       </button>
     </div>
     <div v-for="post in orderBy(filterBy(posts, filter), sortAttribute, sortOrder)" v-bind:key="post.id">
-      <!-- <div v-for="post in orderBy(posts, sortAttribute, sortOrder)" v-bind:key="post.id"> -->
       <router-link :to="`/posts/${post.id}`">
         <h2>{{ post.title }}</h2>
         <p>{{ post.body }}</p>
         <img v-bind:src="post.image_url" class="" alt="" />
       </router-link>
       Claps: {{ post.claps }}
-      <button v-on:click="addClap()">Clap</button>
+      <button v-on:click="addClap(post)">Clap</button>
       <div v-if="post.user_id == $parent.getUserId()">
         <router-link :to="`/posts/${post.id}/edit`">
           <button>Edit Post</button>
         </router-link>
-        <button v-on:click="$parent.destroyPost()">Delete</button>
+        <button v-on:click="destroyPost(post)">Delete</button>
       </div>
       <router-link :to="`/users/${post.user.id}`">
         <p>User: {{ post.user.user_name }}</p>
@@ -63,7 +62,7 @@
       </div>
       <button>Add Comment</button>
       <p v-if="!$parent.isLoggedIn()">Please log in!</p>
-      <form v-on:submit.prevent="$parent.createComment()">
+      <form v-on:submit.prevent="createComment(post)">
         <p>New Comment:</p>
         <ul>
           <li class="text-danger" v-for="error in errors" v-bind:key="error">
@@ -107,6 +106,7 @@ export default {
       checked: "",
       body: "",
       imageUrl: "",
+      currentPost: "",
     };
   },
 
@@ -130,15 +130,43 @@ export default {
     setSortAttribute: function(attribute) {
       this.sortAttribute = attribute;
     },
-    // getCurrentPost: function() {
-    //   return this.post.id;
-    // },
-    addClap: function() {
-      axios.post(`/api/posts/${this.post.id}/clap`).then(response => {
+    addClap: function(post) {
+      let params = {
+        id: post.id,
+      };
+      axios.post(`/api/posts/${post.id}/clap`, params).then(response => {
+        console.log(post);
         console.log(response.data);
+        post.claps += 1;
         this.$parent.flashMessage = "Clap added!";
-        this.$router("`/api/posts/${this.post.id}`");
       });
+    },
+    createComment: function(post) {
+      let params = {
+        body: this.body,
+        image_url: this.imageUrl,
+        post_id: post.id,
+      };
+      axios
+        .post("/api/comments", params)
+        .then(response => {
+          console.log(response.data);
+          this.$parent.flashMessage = "Comment created!";
+          // post.comments.push(response.data);
+        })
+        .catch(error => {
+          this.errors = error.response.data.errors;
+          this.status = error.response.status;
+        });
+    },
+    destroyPost: function(post) {
+      let index = this.posts.indexOf(post);
+      if (confirm("Do you want to delete this post?")) {
+        axios.delete(`api/posts/${post.id}`).then(response => {
+          console.log(response.data);
+          this.posts.splice(index, 1);
+        });
+      }
     },
   },
 };

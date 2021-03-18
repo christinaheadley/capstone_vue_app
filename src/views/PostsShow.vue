@@ -13,11 +13,9 @@
       <router-link :to="`/posts/${post.id}/edit`">
         <button>Edit Post</button>
       </router-link>
-      <button v-on:click="$parent.destroyPost()">Delete</button>
+      <button v-on:click="destroyPost()">Delete</button>
     </div>
     <button v-on:click="addClap()">Clap</button>
-    <!-- add click to add clap +1 -->
-
     <div>
       <router-link :to="`/users/${post.user.id}`">
         <p>User: {{ post.user.user_name }}</p>
@@ -46,7 +44,6 @@
         <input type="text" class="form-control" v-model="imageUrl" />
       </div>
       <input type="submit" class="btn btn-primary" value="Submit" />
-      <router-view />
     </form>
   </div>
 </template>
@@ -65,7 +62,6 @@ export default {
       },
       body: "",
       imageUrl: "",
-      // post_id: `${this.post.id}`,
       errors: [],
     };
   },
@@ -86,15 +82,15 @@ export default {
       let params = {
         body: this.body,
         image_url: this.imageUrl,
-        //  to create comment, need to figure this out so comment attaches to correct post
-        // post_id: this.getCurrentPost(),
+        post_id: this.post.id,
       };
       axios
-        .post("/api/comments", `${this.post.id}`, params)
+        .post("/api/comments", params)
         .then(response => {
           console.log(response.data);
           this.$parent.flashMessage = "Comment created!";
-          this.$router("/");
+          this.post.comments.push(response.data);
+          console.log(this.post.comments);
         })
         .catch(error => {
           this.errors = error.response.data.errors;
@@ -102,12 +98,23 @@ export default {
         });
     },
     addClap: function() {
-      axios.post(`/api/posts/${this.post.id}/clap`).then(response => {
+      let params = {
+        id: this.post.id,
+      };
+      axios.post(`/api/posts/${this.post.id}/clap`, params).then(response => {
+        console.log(this.post);
         console.log(response.data);
+        this.post.claps += 1;
         this.$parent.flashMessage = "Clap added!";
-        this.$router.push("/");
-        // (`/posts/${this.post.id}`);
       });
+    },
+    destroyPost: function() {
+      if (confirm("Do you want to delete this post?")) {
+        axios.delete(`api/posts/${this.post.id}`).then(response => {
+          console.log(response.data);
+          this.$router.push("/");
+        });
+      }
     },
   },
 };

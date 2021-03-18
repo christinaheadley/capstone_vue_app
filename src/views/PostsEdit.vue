@@ -25,7 +25,6 @@
           <input type="checkbox" id="tag.name" name="tag" :value="tag.id" v-model="selectedTagIds" />
           <label for="tag.name">{{ tag.name }}</label>
         </div>
-        <span>Checked tag ids: {{ selectedTagIds }}</span>
       </div>
       <input type="submit" class="btn btn-primary" value="Submit" />
     </form>
