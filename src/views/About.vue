@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <img src="../../src/assets/images/Social_RecoverWe_logo.png" />
+    <!-- <img src="../../src/assets/images/Social_RecoverWe_logo.png" /> -->
     <h1>Social Reintegration after COVID</h1>
     <p>
       Isolation and distancing have been part of our lives whether we wanted to or not. Fear of infection from strangers

@@ -1,5 +1,5 @@
 <template>
-  <div class="logout"><img src="../../src/assets/images/Social_RecoverWe_logo.png" /></div>
+  <div class="logout"></div>
 </template>
 
 <script>

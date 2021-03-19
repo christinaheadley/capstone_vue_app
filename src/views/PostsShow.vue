@@ -1,6 +1,169 @@
 <template>
   <div class="posts-show">
-    <img src="../../src/assets/images/Social_RecoverWe_logo.png" />
+    <!-- ============================================================= SECTION – BLOG POST ============================================================= -->
+
+    <section id="blog-post" class="light-bg">
+      <div class="container inner-top-sm inner-bottom classic-blog no-sidebar">
+        <div class="row">
+          <div class="col-lg-9 mx-auto">
+            <div class="sidemeta">
+              <div class="post format-gallery">
+                <div class="date-wrapper">
+                  <div class="date">
+                    <span class="day">23</span>
+                    <span class="month">May</span>
+                  </div>
+                  <!-- /.date -->
+                </div>
+                <!-- /.date-wrapper -->
+
+                <div class="post-content">
+                  <p class="author">
+                    <router-link
+                      :to="`/users/${post.user.id}`"
+                      title="Post author"
+                      data-rel="tooltip"
+                      data-placement="left"
+                    >
+                      {{ post.user.user_name }}
+                    </router-link>
+                  </p>
+
+                  <h1 class="post-title">{{ post.title }}</h1>
+
+                  <ul class="meta">
+                    <li class="categories">
+                      <a href="#" v-for="tag in post.tags" v-bind:key="tag.id">{{ tag.name }},</a>
+                    </li>
+                    <li class="comments">
+                      <a href="#">{{ post.comments.length }}</a>
+                    </li>
+                    <li v-on:click="addClap()" class="likes">
+                      <a href="#">{{ post.claps }}</a>
+                    </li>
+                  </ul>
+                  <!-- /.meta -->
+
+                  <p>{{ post.body }}</p>
+                </div>
+                <!-- /.post-content -->
+              </div>
+              <!-- /.post -->
+
+              <div class="post-author">
+                <figure>
+                  <div class="author-image icon-overlay icn-link">
+                    <a href="#"><img :src="post.user.image_url" alt="" /></a>
+                  </div>
+
+                  <figcaption class="author-details">
+                    <h3>About the author</h3>
+                    <p>
+                      <router-link :to="`/users/${post.user.id}`">
+                        {{ post.user.user_name }}
+                      </router-link>
+                      {{ post.user.bio }}
+                    </p>
+                    <!-- <ul class="meta">
+                      <li class="author-posts"><a href="#">All posts by Amber</a></li>
+                      <li class="url"><a href="#">ambers-website.com</a></li>
+                    </ul> -->
+                    <!-- /.meta -->
+                  </figcaption>
+                </figure>
+              </div>
+              <!-- /.post-author -->
+
+              <div id="comments">
+                <h2>{{ post.comments.length }} Comments</h2>
+                <ol class="commentlist">
+                  <li class="comment" v-for="comment in post.comments" v-bind:key="comment.id">
+                    <div class="avatar icon-overlay icn-link">
+                      <a href="#"><img v-bind:src="comment.user.image_url" alt="" /></a>
+                    </div>
+                    <!-- /.avatar -->
+
+                    <div class="commentbody">
+                      <div class="author">
+                        <h3>
+                          <a href="#">{{ comment.user.user_name }}</a>
+                        </h3>
+                        <div class="meta">
+                          <span class="date">{{ comment.created_at }}</span>
+                        </div>
+                        <!-- /.meta -->
+                      </div>
+                      <!-- /.author -->
+
+                      <div class="message">
+                        <p>
+                          {{ comment.body }}
+                        </p>
+                      </div>
+                      <!-- /.message -->
+                    </div>
+                    <!-- /.commentbody -->
+                  </li>
+                  <!-- /.comment -->
+                </ol>
+                <!-- /.commentlist -->
+              </div>
+              <!-- /#comments -->
+
+              <div class="comment-form-wrapper">
+                <h2>Leave a Comment</h2>
+
+                <form id="commentform" class="forms" action="" method="post">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <input type="text" name="name" class="form-control" placeholder="Name (Required)" />
+                    </div>
+                    <!-- /.col -->
+                  </div>
+                  <!-- /.row -->
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <input type="email" name="email" class="form-control" placeholder="Email (Required)" />
+                    </div>
+                    <!-- /.col -->
+                  </div>
+                  <!-- /.row -->
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <input type="text" name="website" class="form-control" placeholder="Website" />
+                    </div>
+                    <!-- /.col -->
+                  </div>
+                  <!-- /.row -->
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <textarea name="message" class="form-control" placeholder="Enter your comment ..."></textarea>
+                    </div>
+                    <!-- /.col -->
+                  </div>
+                  <!-- /.row -->
+
+                  <button type="submit" class="btn btn-submit">Submit comment</button>
+                </form>
+
+                <div id="response"></div>
+              </div>
+              <!-- /.comment-form-wrapper -->
+            </div>
+            <!-- /.sidemeta -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container -->
+    </section>
+
+    <!-- ============================================================= SECTION – BLOG POST : END ============================================================= -->
+    <!-- <img src="../../src/assets/images/Social_RecoverWe_logo.png" /> -->
     <h2>{{ post.title }}</h2>
     <p>{{ post.body }}</p>
     <img v-bind:src="post.image_url" class="" alt="" />
@@ -105,7 +268,7 @@ export default {
         console.log(this.post);
         console.log(response.data);
         this.post.claps += 1;
-        this.$parent.flashMessage = "Clap added!";
+        // this.$parent.flashMessage = "Clap added!";
       });
     },
     destroyPost: function() {

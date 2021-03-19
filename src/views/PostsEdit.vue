@@ -1,6 +1,6 @@
 <template>
   <div class="posts-edit">
-    <img src="../../src/assets/images/Social_RecoverWe_logo.png" />
+    <!-- <img src="../../src/assets/images/Social_RecoverWe_logo.png" /> -->
     <form v-on:submit.prevent="updatePost()">
       <h1>Edit Post:</h1>
       <ul>

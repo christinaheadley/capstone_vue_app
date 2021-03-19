@@ -1,7 +1,5 @@
 <template>
   <div class="posts-new">
-    <img src="../../src/assets/images/Social_RecoverWe_logo.png" />
-
     <form v-on:submit.prevent="createPost()">
       <h1>New Post:</h1>
       <ul>
@@ -21,6 +19,14 @@
         <label>Image:</label>
         <input type="text" class="form-control" v-model="imageUrl" />
       </div>
+      <!-- <div v-for="gif in gifs" :key="gif.id">
+        <img v-bind:src="gif.small_gif" class="" alt="" />
+
+        <label for="gif.name">{{ gif.name }}</label>
+      </div>
+      -->
+      <button v-on:click="viewGifs()">Ad`d Gif</button>
+
       <div class="form-group">
         <div v-for="tag in tags" :key="tag.id">
           <input type="checkbox" id="tag.name" name="tag" :value="tag.id" v-model="selectedTagIds" />
@@ -49,10 +55,16 @@ export default {
       tag: {
         name: "",
       },
+      searchTerms: [
+        {
+          small_gif: "",
+        },
+      ],
     };
   },
   created: function() {
     this.indexTags();
+    this.viewGifs();
   },
   methods: {
     createPost: function() {
@@ -78,6 +90,31 @@ export default {
       axios.get("/api/tags").then(response => {
         this.tags = response.data;
         console.log(this.tags);
+      });
+    },
+    viewGifs: function() {
+      axios.get("/api/gifs").then(response => {
+        for (this.small_gif of this.searchTerms);
+        console.log(this.small_gif);
+        this.gifs = response.data;
+        console.log(this.gifs);
+      });
+    },
+
+    // gifs.forEach(gif=> {
+
+    // });
+    searchGifs: function() {
+      let params = {
+        search_terms: this.searchTerms,
+      };
+
+      axios.get("/api/gifs/search", params).then(response => {
+        // for (this.small_gif of this.searchTerms);
+        // console.log(this.small_gif);
+
+        this.gifs = response.data;
+        console.log(this.gifs);
       });
     },
   },

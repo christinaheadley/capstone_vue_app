@@ -1,6 +1,6 @@
 <template>
   <div class="users-edit">
-    <img src="../../src/assets/images/Social_RecoverWe_logo.png" />
+    <!-- <img src="../../src/assets/images/Social_RecoverWe_logo.png" /> -->
     <form v-on:submit.prevent="updateUser()">
       <h1>Edit Profile:</h1>
       <ul>
