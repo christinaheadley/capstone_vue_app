@@ -29,6 +29,10 @@
         <input type="text" class="form-control" v-model="user.bio" />
       </div>
       <div class="form-group">
+        <label>Location:</label>
+        <input type="text" class="form-control" v-model="user.location" />
+      </div>
+      <div class="form-group">
         <label>Image:</label>
         <input type="text" class="form-control" v-model="user.image_url" />
       </div>
@@ -62,6 +66,7 @@ export default {
         password: this.password,
         password_confirmation: this.passwordConfirmation,
         bio: this.bio,
+        location: this.location,
       };
       axios
         .patch(`/api/users/${this.user.id}`, params)

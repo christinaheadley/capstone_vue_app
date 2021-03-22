@@ -5,6 +5,7 @@
     <p v-if="user.id == $parent.getUserId()">{{ user.email }}</p>
     <img v-bind:src="user.image_url" class="" alt="" />
     <p>{{ user.bio }}</p>
+    <p>{{ user.location }}</p>
     <div v-if="user.id == $parent.getUserId()">
       <router-link :to="`/users/${user.id}/edit`">
         <button>Edit Profile</button>

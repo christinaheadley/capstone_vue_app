@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <!-- when add bootstrap, look at : https://www.w3schools.com/bootstrap/bootstrap_button_groups.asp -->
     <!-- ============================================================= SECTION – BUTTONS ============================================================= -->
 
     <section id="buttons">
@@ -130,15 +129,15 @@
                     </h4>
                     <ul class="meta">
                       <li class="categories">
-                        <a href="#" v-for="tag in post.tags" v-bind:key="tag.id">| {{ tag.name }} |</a>
+                        <span v-for="tag in post.tags" v-bind:key="tag.id">| {{ tag.name }} |</span>
                       </li>
-                      <li v-on:click="addClap()" class="likes">
-                        <a href="#">{{ post.claps }}</a>
+                      <li v-on:click="addClap(post)" class="likes">
+                        <span>{{ post.claps }}</span>
                       </li>
                       <li class="comments" v-if="post.comment">
-                        <a href="#">{{ post.comment.id }}</a>
+                        <span>{{ post.comments.count }}</span>
                       </li>
-                      <li class="comments" v-else><a href="#">0</a></li>
+                      <li class="comments" v-else><span>0</span></li>
                     </ul>
                     <figure>
                       <img v-bind:src="post.image_url" class="" alt="" />
@@ -180,15 +179,6 @@
                 </div>
                 <!-- /.post-author -->
 
-                <div id="comments" v-if="gif.small_gif">
-                  <h2>Top Gifs</h2>
-                  <ol class="commentlist">
-                    <li class="comment" v-for="gif in gifs" v-bind:key="gif.small_gif">
-                      <div class="avatar icon-overlay icn-link" img v-bind:src="gif.small_gif" alt=""></div>
-                    </li>
-                  </ol>
-                </div>
-
                 <div id="comments" v-if="post.comment">
                   <h2>Top Comment</h2>
                   <ol class="commentlist">
@@ -205,6 +195,8 @@
                         <p>
                           {{ post.comment.body }}
                         </p>
+                        <p v-if="post.comment.image_url"><img :src="post.comment.image_url" alt="" /></p>
+                        <p v-if="post.comment.gif_url"><img :src="post.comment.gif_url" alt="" /></p>
                         <div class="author">
                           <h4>by {{ post.comment.user.user_name }}</h4>
                           <div class="meta">
@@ -225,15 +217,14 @@
                 <!-- /#comments -->
 
                 <div class="comment-form-wrapper">
+                  <div v-if="!$parent.isLoggedIn()">
+                    <p>
+                      <router-link to="/login">Please log in to leave a comment!</router-link>
+                    </p>
+                  </div>
                   <h2>Leave a Comment</h2>
 
-                  <form id="commentform" class="forms" action="" method="post">
-                    <p v-if="!$parent.isLoggedIn()">
-                      Please
-                      <router-link to="/login">log in</router-link>
-                      to leave a comment!
-                    </p>
-
+                  <form id="commentform" class="forms" v-on:submit.prevent="createComment()">
                     <div class="row">
                       <div class="col-md-12">
                         <input
@@ -259,8 +250,24 @@
                       <!-- /.col -->
                     </div>
                     <!-- /.row -->
+                    <div class="row">
+                      <div class="col-md-12">
+                        <input
+                          type="text"
+                          v-model="gifSearchTerm"
+                          class="form-control"
+                          placeholder="Add search term to add GIF"
+                        />
+                        <span v-if="gifSearchTerm" href="#modal-work03" data-toggle="modal" v-on:click="viewGifs()">
+                          Select GIF
+                        </span>
+                        <img src="/assets/images/giphy.png" class="" alt="GIPHY attribution for GIFs" />
+                      </div>
+                      <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
 
-                    <button v-on:submit.prevent="createComment(post)" type="submit" class="btn btn-submit">
+                    <button type="submit" class="btn btn-submit">
                       Submit comment
                     </button>
                   </form>
@@ -268,6 +275,68 @@
                   <div id="response"></div>
                 </div>
                 <!-- /.comment-form-wrapper -->
+                <!-- ============================================================= MODAL WORK03 ============================================================= -->
+
+                <div
+                  class="modal fade"
+                  id="modal-work03"
+                  tabindex="-1"
+                  role="dialog"
+                  aria-labelledby="modal-work03"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title" id="modal-work03">Medium modal</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true"><i class="icon-cancel-1"></i></span>
+                        </button>
+                      </div>
+                      <!-- /.modal-header -->
+
+                      <!-- ============================================================= MODAL CONTENT ============================================================= -->
+
+                      <div class="modal-body">
+                        <!-- ============================================================= SECTION – PORTFOLIO POST ============================================================= -->
+
+                        <section id="portfolio-post">
+                          <div class="container inner-top-xs inner-bottom">
+                            <div class="row">
+                              <div class="col-md-4" v-for="gif in gifs" v-bind:key="gif.small_gif">
+                                <img
+                                  v-on:click="gifUrl = gif.small_gif"
+                                  class="gif-select"
+                                  v-bind:class="{ 'selected-gif': gifUrl == gif.small_gif }"
+                                  :src="gif.small_gif"
+                                  alt=""
+                                />
+                              </div>
+                              <!-- /.col -->
+                            </div>
+                            <!-- /.row -->
+                          </div>
+                          <!-- /.container -->
+                        </section>
+
+                        <!-- ============================================================= SECTION – PORTFOLIO POST : END ============================================================= -->
+                      </div>
+                      <!-- /.modal-body -->
+
+                      <!-- ============================================================= MODAL CONTENT : END ============================================================= -->
+
+                      <div class="modal-footer">
+                        <button type="button" class="btn" data-dismiss="modal">Close</button>
+                      </div>
+                      <!-- /.modal-footer -->
+                    </div>
+                    <!-- /.modal-content -->
+                  </div>
+                  <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+
+                <!-- ============================================================= MODAL WORK03 : END ============================================================= -->
               </div>
               <!-- /.sidemeta -->
             </div>
@@ -279,17 +348,21 @@
 
                 <form id="search" class="navbar-form search" role="search">
                   <input type="search" v-model="filter" class="form-control" placeholder="Type to search" />
-                  <!-- <button type="submit" class="btn btn-submit icon-right-open"></button> -->
+                  <button type="submit" class="btn btn-submit icon-right-open"></button>
                 </form>
               </div>
               <!-- /.widget -->
 
               <div class="sidebox widget">
                 <h4>Categories</h4>
+                <!-- ============================================================= SECTION – BUTTONS ============================================================= -->
+
+                <!-- ============================================================= SECTION – BUTTONS : END ============================================================= -->
 
                 <ul v-for="tag in tags" v-bind="tag.name" :key="tag.name" class="circled">
                   <li id="tag.name" name="tag" value="tag.name">
-                    <a href="#">{{ tag.name }}</a>
+                    <!-- <a v-bind:[tag]="filter">{{ tag.name }}</a> -->
+                    <button v-on:click="setFilterAttribute(tag.name)">{{ tag.name }}</button>
                   </li>
                 </ul>
                 <!-- /.circled -->
@@ -321,101 +394,8 @@
     </section>
 
     <!-- ============================================================= SECTION – BLOG POST : END ============================================================= -->
-    <!-- <div class="checkbox">
-      <div v-for="tag in tags" v-bind="tag.name" :key="tag.name">
-        <input type="checkbox" id="tag.name" name="tag" value="tag.name" />
-        <label for="tag.name">{{ tag.name }}</label>
-      </div>
-    </div> -->
-    <!-- <div>
-      <button
-        v-on:click="
-          sortAttribute = 'created_at';
-          sortOrder = -1;
-        "
-      >
-        Sort by date
-      </button>
-      <button
-        v-on:click="
-          sortAttribute = 'claps';
-          sortOrder = -1;
-        "
-      >
-        Sort by popularity
-      </button>
-    </div> -->
-    <!-- <div>
-      <input type="text" v-model="filter" />
-    </div>
-    <div v-for="post in orderBy(filterBy(posts, filter), sortAttribute, sortOrder)" v-bind:key="post.id">
-      <router-link :to="`/posts/${post.id}`">
-        <h2>{{ post.title }}</h2>
-        <p>Posted: {{ relativeDate(post.created_at) }}</p>
-        <p>{{ post.body }}</p>
-        <img v-bind:src="post.image_url" class="" alt="" />
-      </router-link>
-      Claps: {{ post.claps }}
-      <button v-on:click="addClap(post)">Clap</button>
-      <div v-if="post.user_id == $parent.getUserId()">
-        <router-link :to="`/posts/${post.id}/edit`">
-          <button>Edit Post</button>
-        </router-link>
-        <button v-on:click="destroyPost(post)">Delete</button>
-      </div>
-      <router-link :to="`/users/${post.user.id}`">
-        <p>User: {{ post.user.user_name }}</p>
-        <img v-bind:src="post.user.image_url" class="" alt="" />
-      </router-link>
-      <div v-if="post.tags">
-        <div v-for="tag in post.tags" v-bind:key="tag.id">
-          {{ tag.name }}
-        </div>
-      </div>
-      <div v-if="post.comment">
-        Comment: {{ post.comment.body }}-->
-    <!-- comment relativeDate shorts out page- idk why      ? -->
-    <!--<p>{{ relativeDate(post.comment.created_at) }}</p>
-        <p v-if="post.comment.user">
-          name:{{ post.comment.user.user_name }} pic:
-          <img v-bind:src="post.comment.user.image_url" class="" alt="" />
-        </p>
-      </div>
-      <div v-for="comment in post.comments" v-bind:key="comment.id">
-        Comment: {{ comment.body }} Commenter: {{ comment.user.user_name }} Commenter pic:
-        <img v-bind:src="comment.user.image_url" class="" alt="" />
-      </div>
-      <button>Add Comment</button>
-      <p v-if="!$parent.isLoggedIn()">Please log in!</p>
-      <form v-on:submit.prevent="createComment(post)">
-        <p>New Comment:</p>
-        <ul>
-          <li class="text-danger" v-for="error in errors" v-bind:key="error">
-            {{ error }}
-          </li>
-        </ul>
-        <div class="form-group">
-          <label>Text:</label>
-          <input type="text" class="form-control" v-model="body" />
-        </div>
-        <div class="form-group">
-          <label>Image:</label>
-          <input type="text" class="form-control" v-model="imageUrl" />
-        </div>
-        <input type="submit" class="btn btn-primary" value="Submit" />
-        <router-view />
-      </form>
-    </div> -->
   </div>
-
-  <!-- edit and delete buttons for comment owner </div> -->
 </template>
-
-<style>
-#blog-post {
-  margin: auto;
-}
-</style>
 
 <script>
 import axios from "axios";
@@ -436,18 +416,17 @@ export default {
       checked: "",
       body: "",
       imageUrl: "",
+      gifUrl: "",
       filter: "",
       gifs: [],
-      gif: {
-        small_gif: "",
-      },
+      gifSearchTerm: "",
+      filterAttribute: "",
     };
   },
 
   created: function() {
     this.indexPosts();
     this.indexTags();
-    this.viewGifs();
   },
   methods: {
     indexPosts: function() {
@@ -465,6 +444,10 @@ export default {
     setSortAttribute: function(attribute) {
       this.sortAttribute = attribute;
     },
+    setFilterAttribute: function(attribute) {
+      this.filter = attribute;
+    },
+
     addClap: function(post) {
       let params = {
         id: post.id,
@@ -480,14 +463,17 @@ export default {
       let params = {
         body: this.body,
         image_url: this.imageUrl,
-        post_id: post.id,
+        gif_url: this.gifUrl,
+        post_id: this.postId,
       };
       axios
         .post("/api/comments", params)
         .then(response => {
           console.log(response.data);
           this.$parent.flashMessage = "Comment created!";
-          // post.comments.push(response.data);
+          // this.post.comments.push(response.data);
+          // console.log(this.post.comments);
+          console.log(post);
         })
         .catch(error => {
           this.errors = error.response.data.errors;
@@ -504,11 +490,17 @@ export default {
       }
     },
     viewGifs: function() {
-      axios.get("/api/gifs").then(response => {
+      axios.get(`/api/gifs/search?search_term=${this.gifSearchTerm}`).then(response => {
         this.gifs = response.data;
         console.log(this.gifs);
       });
     },
+    // trendGifs: function() {
+    //   axios.get("/api/gifs").then(response => {
+    //     this.gifs = response.data;
+    //     console.log(this.gifs);
+    //   });
+    // },
     relativeDate: function(date) {
       return moment(date).fromNow();
     },

@@ -58,16 +58,18 @@
 
                   <figcaption class="author-details">
                     <h3>About the author</h3>
-                    <p>
-                      <router-link :to="`/users/${post.user.id}`">
+
+                    <router-link :to="`/users/${post.user.id}`">
+                      <p>
                         {{ post.user.user_name }}
-                      </router-link>
-                      {{ post.user.bio }}
-                    </p>
-                    <!-- <ul class="meta">
-                      <li class="author-posts"><a href="#">All posts by Amber</a></li>
-                      <li class="url"><a href="#">ambers-website.com</a></li>
-                    </ul> -->
+                        {{ post.user.bio }}
+                      </p>
+                    </router-link>
+                    <ul class="meta">
+                      <li class="author-posts">
+                        <a href="#">All posts by {{ post.user.user_name }}</a>
+                      </li>
+                    </ul>
                     <!-- /.meta -->
                   </figcaption>
                 </figure>
@@ -125,21 +127,31 @@
                   <!-- /.row -->
                   <div class="row">
                     <div class="col-md-12">
-                      <input type="text" v-model="imageUrl" class="form-control" placeholder="Image Url" />
+                      <input
+                        type="text"
+                        v-model="imageUrl"
+                        class="form-control"
+                        placeholder="Enter an image (optional)"
+                      />
                     </div>
                     <!-- /.col -->
                   </div>
                   <!-- /.row -->
 
                   <div class="row">
-                    <div class="col-md-4">
-                      <input type="text" placeholder="search text here" v-model="gifSearchTerm" />
+                    <div class="col-md-12">
+                      <input
+                        type="text"
+                        v-model="gifSearchTerm"
+                        class="form-control"
+                        placeholder="Add search term to add GIF"
+                      />
+                      <span v-if="gifSearchTerm" href="#modal-work03" data-toggle="modal" v-on:click="viewGifs()">
+                        Select GIF
+                      </span>
                     </div>
-                    <a v-if="gifSearchTerm" href="#modal-work03" data-toggle="modal" v-on:click="viewGifs()">
-                      add gif
-                    </a>
-
                     <!-- /.col -->
+                    <img src="/assets/images/giphy.png" class="" alt="GIPHY attribution for GIFs" />
                   </div>
                   <!-- /.row -->
 
@@ -223,51 +235,6 @@
     <!-- ============================================================= MODAL WORK03 : END ============================================================= -->
 
     <!-- ============================================================= SECTION – BLOG POST : END ============================================================= -->
-    <!-- <img src="../../src/assets/images/Social_RecoverWe_logo.png" /> -->
-    <h2>{{ post.title }}</h2>
-    <p>{{ post.body }}</p>
-    <img v-bind:src="post.image_url" class="" alt="" />
-    Tags:{{ post.tag }}
-    <p v-for="tag in post.tags" v-bind:key="tag.id">
-      {{ tag.name }}
-    </p>
-    <p>Claps: {{ post.claps }}</p>
-    <div v-if="post.user_id == $parent.getUserId()">
-      <router-link :to="`/posts/${post.id}/edit`">
-        <button>Edit Post</button>
-      </router-link>
-      <button v-on:click="destroyPost()">Delete</button>
-    </div>
-    <button v-on:click="addClap()">Clap</button>
-    <div>
-      <router-link :to="`/users/${post.user.id}`">
-        <p>User: {{ post.user.user_name }}</p>
-        <img v-bind:src="post.user.image_url" class="" alt="" />
-      </router-link>
-    </div>
-    <div v-for="comment in post.comments" v-bind:key="comment.id">
-      Comment: {{ comment.body }} Commenter: {{ comment.user.user_name }} Commenter pic:
-      <img v-bind:src="comment.user.image_url" class="" alt="" />
-    </div>
-    <button>Add Comment</button>
-    <p v-if="!$parent.isLoggedIn()">Please log in!</p>
-    <form v-on:submit.prevent="createComment()">
-      <p>New Comment:</p>
-      <ul>
-        <li class="text-danger" v-for="error in errors" v-bind:key="error">
-          {{ error }}
-        </li>
-      </ul>
-      <div class="form-group">
-        <label>Text:</label>
-        <input type="text" class="form-control" v-model="body" />
-      </div>
-      <div class="form-group">
-        <label>Image:</label>
-        <input type="text" class="form-control" v-model="imageUrl" />
-      </div>
-      <input type="submit" class="btn btn-primary" value="Submit" />
-    </form>
   </div>
 </template>
 
@@ -279,7 +246,7 @@
   border: 5px solid blueviolet;
 }
 </style>
-```1`
+
 <script>
 import axios from "axios";
 export default {
