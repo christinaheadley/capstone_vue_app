@@ -1,5 +1,102 @@
 <template>
   <div class="posts-new">
+    <!-- ============================================================= SECTION – BLOG POST ============================================================= -->
+
+    <section id="blog-post" class="light-bg">
+      <div class="container inner-top-sm inner-bottom classic-blog no-sidebar">
+        <div class="row">
+          <div class="col-lg-9 mx-auto">
+            <div class="sidemeta">
+              <div id="accordion-related-posts" class="panel-group"></div>
+              <!-- /.panel-group -->
+
+              <div class="comment-form-wrapper">
+                <h2>Add New Post</h2>
+
+                <form v-on:submit.prevent="createPost()" id="commentform" class="forms" action="" method="post">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <input
+                        v-model="title"
+                        type="text"
+                        name="name"
+                        class="form-control"
+                        placeholder="Title (Required)"
+                      />
+                    </div>
+                    <!-- /.col -->
+                  </div>
+                  <!-- /.row -->
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <textarea
+                        v-model="body"
+                        name="message"
+                        class="form-control"
+                        placeholder="Enter your post ..."
+                      ></textarea>
+                    </div>
+                    <!-- /.col -->
+                  </div>
+                  <!-- /.row -->
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <textarea
+                        v-model="imageUrl"
+                        name="text"
+                        class="form-control"
+                        placeholder="Enter an image (optional) ..."
+                      ></textarea>
+                    </div>
+                    <!-- /.col -->
+                  </div>
+                  <!-- /.row -->
+
+                  <div class="row">
+                    <div v-for="tag in tags" :key="tag.id" class="col-sm-4">
+                      <div class="col-sm-4">
+                        <div class="col-sm-4">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <input
+                                  type="checkbox"
+                                  id="tag.name"
+                                  name="tag"
+                                  :value="tag.id"
+                                  v-model="selectedTagIds"
+                                  class="form-control"
+                                />
+                                <label for="tag.name">
+                                  <h6>{{ tag.name }}</h6>
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button type="submit" class="btn btn-submit">Submit Post</button>
+                </form>
+
+                <div id="response"></div>
+              </div>
+              <!-- /.comment-form-wrapper -->
+            </div>
+            <!-- /.sidemeta -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container -->
+    </section>
+
+    <!-- ============================================================= SECTION – BLOG POST : END ============================================================= -->
     <form v-on:submit.prevent="createPost()">
       <h1>New Post:</h1>
       <ul>
@@ -19,13 +116,14 @@
         <label>Image:</label>
         <input type="text" class="form-control" v-model="imageUrl" />
       </div>
-      <!-- <div v-for="gif in gifs" :key="gif.id">
-        <img v-bind:src="gif.small_gif" class="" alt="" />
+      <!-- <div class="form-group">
+        <label>Image:</label>
+        <input type="text" class="form-control" v-model="small_gif" />
+      </div> -->
 
-        <label for="gif.name">{{ gif.name }}</label>
-      </div>
-      -->
-      <button v-on:click="viewGifs()">Ad`d Gif</button>
+      <!-- <div v-for="gif in gifs" :key="gif.small_gif">
+        <p>{{ gif.small_gif }}</p>
+      </div> -->
 
       <div class="form-group">
         <div v-for="tag in tags" :key="tag.id">
@@ -55,6 +153,7 @@ export default {
       tag: {
         name: "",
       },
+      gifs: [],
       searchTerms: [
         {
           small_gif: "",
@@ -64,7 +163,6 @@ export default {
   },
   created: function() {
     this.indexTags();
-    this.viewGifs();
   },
   methods: {
     createPost: function() {
@@ -92,26 +190,15 @@ export default {
         console.log(this.tags);
       });
     },
-    viewGifs: function() {
-      axios.get("/api/gifs").then(response => {
-        for (this.small_gif of this.searchTerms);
-        console.log(this.small_gif);
-        this.gifs = response.data;
-        console.log(this.gifs);
-      });
-    },
 
-    // gifs.forEach(gif=> {
-
-    // });
     searchGifs: function() {
       let params = {
         search_terms: this.searchTerms,
       };
 
       axios.get("/api/gifs/search", params).then(response => {
-        // for (this.small_gif of this.searchTerms);
-        // console.log(this.small_gif);
+        for (this.small_gif of this.searchTerms);
+        console.log(this.small_gif);
 
         this.gifs = response.data;
         console.log(this.gifs);

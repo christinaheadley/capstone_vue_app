@@ -99,6 +99,8 @@
                         <p>
                           {{ comment.body }}
                         </p>
+                        <p v-if="comment.image_url"><img :src="comment.image_url" alt="" /></p>
+                        <p v-if="comment.gif_url"><img :src="comment.gif_url" alt="" /></p>
                       </div>
                       <!-- /.message -->
                     </div>
@@ -113,35 +115,30 @@
               <div class="comment-form-wrapper">
                 <h2>Leave a Comment</h2>
 
-                <form id="commentform" class="forms" action="" method="post">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <input type="text" name="name" class="form-control" placeholder="Name (Required)" />
-                    </div>
-                    <!-- /.col -->
-                  </div>
-                  <!-- /.row -->
-
-                  <div class="row">
-                    <div class="col-md-6">
-                      <input type="email" name="email" class="form-control" placeholder="Email (Required)" />
-                    </div>
-                    <!-- /.col -->
-                  </div>
-                  <!-- /.row -->
-
-                  <div class="row">
-                    <div class="col-md-6">
-                      <input type="text" name="website" class="form-control" placeholder="Website" />
-                    </div>
-                    <!-- /.col -->
-                  </div>
-                  <!-- /.row -->
-
+                <form id="commentform" class="forms" v-on:submit.prevent="createComment()">
                   <div class="row">
                     <div class="col-md-12">
-                      <textarea name="message" class="form-control" placeholder="Enter your comment ..."></textarea>
+                      <textarea v-model="body" class="form-control" placeholder="Enter your comment ..."></textarea>
                     </div>
+                    <!-- /.col -->
+                  </div>
+                  <!-- /.row -->
+                  <div class="row">
+                    <div class="col-md-12">
+                      <input type="text" v-model="imageUrl" class="form-control" placeholder="Image Url" />
+                    </div>
+                    <!-- /.col -->
+                  </div>
+                  <!-- /.row -->
+
+                  <div class="row">
+                    <div class="col-md-4">
+                      <input type="text" placeholder="search text here" v-model="gifSearchTerm" />
+                    </div>
+                    <a v-if="gifSearchTerm" href="#modal-work03" data-toggle="modal" v-on:click="viewGifs()">
+                      add gif
+                    </a>
+
                     <!-- /.col -->
                   </div>
                   <!-- /.row -->
@@ -161,6 +158,69 @@
       </div>
       <!-- /.container -->
     </section>
+
+    <!-- ============================================================= MODAL WORK03 ============================================================= -->
+
+    <div
+      class="modal fade"
+      id="modal-work03"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="modal-work03"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-work03">Medium modal</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true"><i class="icon-cancel-1"></i></span>
+            </button>
+          </div>
+          <!-- /.modal-header -->
+
+          <!-- ============================================================= MODAL CONTENT ============================================================= -->
+
+          <div class="modal-body">
+            <!-- ============================================================= SECTION – PORTFOLIO POST ============================================================= -->
+
+            <section id="portfolio-post">
+              <div class="container inner-top-xs inner-bottom">
+                <div class="row">
+                  <div class="col-md-4" v-for="gif in gifs" v-bind:key="gif.small_gif">
+                    <img
+                      v-on:click="gifUrl = gif.small_gif"
+                      class="gif-select"
+                      v-bind:class="{ 'selected-gif': gifUrl == gif.small_gif }"
+                      :src="gif.small_gif"
+                      alt=""
+                    />
+                  </div>
+                  <!-- /.col -->
+                </div>
+                <!-- /.row -->
+              </div>
+              <!-- /.container -->
+            </section>
+
+            <!-- ============================================================= SECTION – PORTFOLIO POST : END ============================================================= -->
+          </div>
+          <!-- /.modal-body -->
+
+          <!-- ============================================================= MODAL CONTENT : END ============================================================= -->
+
+          <div class="modal-footer">
+            <button type="button" class="btn" data-dismiss="modal">Close</button>
+          </div>
+          <!-- /.modal-footer -->
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <!-- ============================================================= MODAL WORK03 : END ============================================================= -->
 
     <!-- ============================================================= SECTION – BLOG POST : END ============================================================= -->
     <!-- <img src="../../src/assets/images/Social_RecoverWe_logo.png" /> -->
@@ -211,8 +271,15 @@
   </div>
 </template>
 
-<style></style>
-
+<style>
+.gif-select {
+  width: 100%;
+}
+.selected-gif {
+  border: 5px solid blueviolet;
+}
+</style>
+```1`
 <script>
 import axios from "axios";
 export default {
@@ -222,10 +289,14 @@ export default {
         user: {
           user_name: "",
         },
+        comments: {},
       },
       body: "",
       imageUrl: "",
+      gifUrl: "",
       errors: [],
+      gifs: [],
+      gifSearchTerm: "",
     };
   },
   created: function() {
@@ -245,6 +316,7 @@ export default {
       let params = {
         body: this.body,
         image_url: this.imageUrl,
+        gif_url: this.gifUrl,
         post_id: this.post.id,
       };
       axios
@@ -278,6 +350,12 @@ export default {
           this.$router.push("/");
         });
       }
+    },
+    viewGifs: function() {
+      axios.get(`/api/gifs/search?search_term=${this.gifSearchTerm}`).then(response => {
+        this.gifs = response.data;
+        console.log(this.gifs);
+      });
     },
   },
 };

@@ -209,39 +209,37 @@
                 </div>
                 <!-- /.date-wrapper -->
 
-                <div class="format-wrapper">
-                  <a href="#"><i class="icon-picture"></i></a>
-                </div>
-                <!-- /.format-wrapper -->
-
                 <div class="post-content" data-rel="tooltip" data-placement="left">
-                  <h1 class="post-title">{{ post.title }}</h1>
-                  <h3 class="author">
-                    <router-link :to="`/users/${post.user.id}`">
-                      <h3>
-                        by
-                        {{ post.user.user_name }}
-                      </h3>
-                    </router-link>
-                  </h3>
+                  <router-link :to="`/posts/${post.id}`">
+                    <h1 class="post-title">{{ post.title }}</h1>
+                    <h3 class="author"></h3>
+                  </router-link>
+                  <router-link :to="`/users/${post.user.id}`">
+                    <h3>
+                      by
+                      {{ post.user.user_name }}
+                    </h3>
+                  </router-link>
+
                   <h4>
                     {{ relativeDate(post.created_at) }}
                   </h4>
 
-                  <ul class="meta">
-                    <li class="categories">
-                      <a href="#">Identity</a>
+                  <ul class="meta" v-if="post.tags">
+                    <li class="categories" v-for="tag in post.tags" v-bind:key="tag.id">
+                      {{ tag.name, }}
+                    </li>
+                    <li v-on:click="addClap(post)" class="likes">
+                      {{ post.claps }}
+                    </li>
+                    <!-- <a href="#">Identity</a>
                       ,
-                      <a href="#">Graphic Design</a>
-                    </li>
-                    <li class="comments">
-                      <router-link :to="`/posts/${post.id}`">
-                        <!-- post.comments.anything doesn't work here even if it works elsewhere in code, adding  v-if="post.comment" to li doesn't work -->
-                        3
-                      </router-link>
-                    </li>
-                    <li v-on:click="addClap()" class="likes">
-                      <a href="#">{{ post.claps }}</a>
+                      <a href="#">Graphic Design</a> -->
+                  </ul>
+                  <ul class="meta" v-if="post.comments">
+                    <li class="comments" v-for="comment in post.comments" v-bind:key="comment.id">
+                      <!-- post.comments.anything doesn't work here even if it works elsewhere in code, adding  v-if="post.comment" to li doesn't work -->
+                      {{ comment.id }}
                     </li>
                   </ul>
                   <figure>
@@ -285,22 +283,28 @@
               </div>
               <!-- /.post-author -->
 
+              <div id="comments" v-if="gif.small_gif">
+                <h2>Top Gifs</h2>
+                <ol class="commentlist">
+                  <li class="comment" v-for="gif in gifs" v-bind:key="gif.small_gif">
+                    <div class="avatar icon-overlay icn-link" img v-bind:src="gif.small_gif" alt=""></div>
+                  </li>
+                </ol>
+              </div>
+
               <div id="comments" v-if="post.comment">
                 <h2>Top Comment</h2>
-                <ol class="commentlist" v-for="comment in post.comments" v-bind:key="comment.id">
+                <ol class="commentlist">
                   <li class="comment">
-                    <div class="avatar icon-overlay icn-link">
-                      <a href="#"><img v-bind:src="comment.user.image_url" class="" alt="" /></a>
-                    </div>
+                    <div class="avatar icon-overlay icn-link" img v-bind:src="post.comment.user.image_url" alt=""></div>
                     <!-- /.avatar -->
 
                     <div class="commentbody">
+                      Comment: {{ post.comment.body }}
                       <div class="author">
-                        <h3>
-                          <a href="#">{{ comment.user.user_name }}</a>
-                        </h3>
+                        <h3>name:{{ post.comment.user.user_name }}</h3>
                         <div class="meta">
-                          <span class="date">about 5 hours ago</span>
+                          <span class="date">{{ relativeDate(post.comment.created_at) }}</span>
                         </div>
                         <!-- /.meta -->
                       </div>
@@ -308,7 +312,7 @@
 
                       <div class="message">
                         <p>
-                          {{ comment.body }}
+                          {{ post.comment.body }}
                         </p>
                       </div>
                       <!-- /.message -->
@@ -325,39 +329,40 @@
                 <h2>Leave a Comment</h2>
 
                 <form id="commentform" class="forms" action="" method="post">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <input type="text" name="name" class="form-control" placeholder="Name (Required)" />
-                    </div>
-                    <!-- /.col -->
-                  </div>
-                  <!-- /.row -->
-
-                  <div class="row">
-                    <div class="col-md-6">
-                      <input type="email" name="email" class="form-control" placeholder="Email (Required)" />
-                    </div>
-                    <!-- /.col -->
-                  </div>
-                  <!-- /.row -->
-
-                  <div class="row">
-                    <div class="col-md-6">
-                      <input type="text" name="website" class="form-control" placeholder="Website" />
-                    </div>
-                    <!-- /.col -->
-                  </div>
-                  <!-- /.row -->
+                  <p v-if="!$parent.isLoggedIn()">
+                    Please
+                    <router-link to="/login">log in</router-link>
+                    to leave a comment!
+                  </p>
 
                   <div class="row">
                     <div class="col-md-12">
-                      <textarea name="message" class="form-control" placeholder="Enter your comment ..."></textarea>
+                      <textarea
+                        name="message"
+                        class="form-control"
+                        v-model="body"
+                        placeholder="Enter your comment ..."
+                      ></textarea>
+                    </div>
+                    <!-- /.col -->
+                  </div>
+                  <!-- /.row -->
+                  <div class="row">
+                    <div class="col-md-12">
+                      <textarea
+                        name="image"
+                        class="form-control"
+                        v-model="imageUrl"
+                        placeholder="Enter an image... (optional)"
+                      ></textarea>
                     </div>
                     <!-- /.col -->
                   </div>
                   <!-- /.row -->
 
-                  <button type="submit" class="btn btn-submit">Submit comment</button>
+                  <button v-on:submit.prevent="createComment(post)" type="submit" class="btn btn-submit">
+                    Submit comment
+                  </button>
                 </form>
 
                 <div id="response"></div>
@@ -547,12 +552,17 @@ export default {
       body: "",
       imageUrl: "",
       filter: "",
+      gifs: [],
+      gif: {
+        small_gif: "",
+      },
     };
   },
 
   created: function() {
     this.indexPosts();
     this.indexTags();
+    this.viewGifs();
   },
   methods: {
     indexPosts: function() {
@@ -607,6 +617,12 @@ export default {
           this.posts.splice(index, 1);
         });
       }
+    },
+    viewGifs: function() {
+      axios.get("/api/gifs").then(response => {
+        this.gifs = response.data;
+        console.log(this.gifs);
+      });
     },
     relativeDate: function(date) {
       return moment(date).fromNow();
