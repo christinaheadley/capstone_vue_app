@@ -33,7 +33,7 @@
 
                   <ul class="meta">
                     <li class="categories">
-                      <a href="#" v-for="tag in post.tags" v-bind:key="tag.id">{{ tag.name }},</a>
+                      <a href="#" v-for="tag in post.tags" v-bind:key="tag.id">| {{ tag.name }} |</a>
                     </li>
                     <li class="comments">
                       <a href="#">{{ post.comments.length }}</a>

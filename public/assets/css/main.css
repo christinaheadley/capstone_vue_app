@@ -61,7 +61,7 @@ body {
   font-family: "Source Sans Pro", sans-serif;
   background-color: #283645;
   color: #73879c;
-  font-size: 22px;
+  font-size: 18px;
   line-height: 150%;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
@@ -616,11 +616,11 @@ figure.post-media + * {
   content: "\201C";
   font-family: inherit;
   font-size: inherit;
-  margin-right: 2px; 
+  margin-right: 2px;
 }
 .member figcaption blockquote:after {
   content: "\201D";
-  margin-left: 2px; 
+  margin-left: 2px;
 }
 .member .social {
   display: inline-block;
@@ -2391,7 +2391,7 @@ p .btn {
 .format-quote {
   position: relative;
 }
-/* .format-quote:before {
+.format-quote:before {
   content: "";
   position: absolute;
   top: 0;
@@ -2399,7 +2399,7 @@ p .btn {
   bottom: 0;
   right: 0;
   background: url("../images/art/pattern-background01.jpg");
-  opacity: 0.05; */
+  opacity: 0.05;
 }
 #testimonials #owl-testimonials {
   margin-top: 10px;
@@ -2407,14 +2407,14 @@ p .btn {
 blockquote {
   position: relative;
 }
-	/* #testimonials #owl-testimonials:before,
-	blockquote:before {
-		display: block;
-		position: relative;
-		font-family: "fontello";
-		content: "\275e";
-		font-size: 40px;
-		line-height: 100%; */
+#testimonials #owl-testimonials:before,
+blockquote:before {
+  display: block;
+  position: relative;
+  font-family: "fontello";
+  content: "\275e";
+  font-size: 40px;
+  line-height: 100%;
 }
 #testimonials #owl-testimonials:before {
   top: -10px;
@@ -2435,7 +2435,7 @@ blockquote:before {
 .format-quote blockquote,
 .format-quote blockquote footer,
 .format-quote blockquote small,
-.format-quote blockquote .small { 
+.format-quote blockquote .small {
   color: #fff;
 }
 .format-quote blockquote footer:before,
@@ -2443,7 +2443,7 @@ blockquote:before {
 .format-quote blockquote .small:before,
 .format-quote blockquote footer:after,
 .format-quote blockquote small:after,
-.format-quote blockquote .small:after { 
+.format-quote blockquote .small:after {
   background-color: #fff;
 }
 .format-quote .meta a:hover {
@@ -2765,7 +2765,7 @@ blockquote:before {
 .items li .text-overlay:before,
 .thumbs .thumb .text-overlay:before,
 .owl-carousel .item .text-overlay:before {
-  /* content: ""; */
+  content: "";
   display: inline-block;
   vertical-align: middle;
   height: 100%;
@@ -3012,7 +3012,7 @@ blockquote:before {
   margin-top: 6px;
 }
 .item-details li:before {
-  /* content: ""; */
+  content: "";
   font-family: "fontello";
   color: #506a85;
   margin-right: 10px;
@@ -3102,7 +3102,7 @@ blockquote:before {
   opacity: 1;
 }
 .owl-outer-nav:after {
-  /* content: ""; */
+  content: "";
   position: absolute;
   top: 0;
   left: -15%;
@@ -3661,7 +3661,7 @@ textarea.form-control {
 }
 .forms label {
   display: block;
-  float: right;
+  float: left;
   width: 95px;
   padding-top: 7px;
   font-size: 13px;
@@ -3677,7 +3677,7 @@ textarea.form-control {
   background: #fff;
 }
 .form-container:after {
-  /* content: ""; */
+  content: "";
   display: block;
   height: 0;
   clear: both;
@@ -3798,8 +3798,6 @@ input:focus:-ms-input-placeholder {
 .blog.no-sidebar #comments,
 .blog.no-sidebar .pagination,
 .blog.no-sidebar .comment-form-wrapper {
-  /* I added but doesn't work: */
-  text-align: left;
   width: 770px;
   margin: 0px auto !important;
 }
@@ -3811,7 +3809,7 @@ input:focus:-ms-input-placeholder {
   font-size: 24px;
 }
 .format-filter li:after {
-  /* content: ""; */
+  content: "";
 }
 .format-filter li a {
   padding: 0 35px;
@@ -3831,7 +3829,7 @@ input:focus:-ms-input-placeholder {
 }
 .meta li.categories:before,
 .meta li a:before {
-  /* content: ""; */
+  content: "";
   font-family: "fontello";
   margin-right: 6px;
 }
@@ -3968,7 +3966,6 @@ input:focus:-ms-input-placeholder {
 .sidemeta .format-wrapper a {
   display: table-cell;
   vertical-align: middle;
-  margin: auto;
   width: 40px;
   height: 40px;
   background: #fff;
@@ -4012,7 +4009,6 @@ input:focus:-ms-input-placeholder {
   left: -90px;
 }
 .sidemeta .format-wrapper {
-  margin: auto;
   position: absolute;
   top: 75px;
   left: -80px;
@@ -4027,7 +4023,6 @@ input:focus:-ms-input-placeholder {
   right: -80px;
 }
 .grid-blog .post figure {
-  margin: auto;
   margin-bottom: -1px;
 }
 .grid-blog .post .date {
@@ -4046,7 +4041,6 @@ input:focus:-ms-input-placeholder {
   float: left;
   min-height: 1px;
   position: relative;
-  margin: auto;
 }
 .grid-blog.col-2-custom .post,
 .grid-blog.col-3-custom.no-sidebar .post {
@@ -4338,23 +4332,20 @@ input:focus:-ms-input-placeholder {
 
 #comments {
   position: relative;
-  margin: auto;
 }
 #comments .commentlist {
   list-style: none;
-  margin: auto
+  margin: 0;
   padding: 0;
 }
 #comments .commentlist > .comment {
   padding-top: 40px;
   border-top: 1px solid #e6e9ed;
   margin-top: 40px;
-	
 }
 #comments .commentlist > .comment:first-child {
   border-top: none;
   padding-top: 0;
-	
 }
 #comments .comment *:last-child {
   margin-bottom: 0;
@@ -4379,7 +4370,6 @@ input:focus:-ms-input-placeholder {
 #comments .commentbody {
   padding-left: 22px;
   overflow: hidden;
-	margin: auto
 }
 #comments .author {
   margin-bottom: 15px;
@@ -4422,9 +4412,6 @@ input:focus:-ms-input-placeholder {
 }
 .comment-form-wrapper p {
   padding-bottom: 20px;
-  /* I added but doesn't work: */
-  text-align: left;
-	
 }
 .blog.no-sidebar #comments .meta {
   text-align: left;
@@ -5086,19 +5073,14 @@ input:focus:-ms-input-placeholder {
   .blog.no-sidebar .pagination,
   .blog.no-sidebar .comment-form-wrapper {
     width: 100%;
-    /* text-align: left; */
   }
   .classic-blog .pagination,
   .classic-blog .comment-form-wrapper {
     margin-bottom: 120px;
-    /* I added but doesn't work: */
-    text-align: left;
   }
   .classic-blog.no-sidebar .pagination,
   .classic-blog.no-sidebar .comment-form-wrapper {
     margin-bottom: 0;
-    /* I added but doesn't work: */
-    text-align: left;
   }
   [class*="col-lg"][class*="inner-left"],
   [class*="col-lg"][class*="inner-right"] {
@@ -5651,8 +5633,6 @@ input:focus:-ms-input-placeholder {
   .classic-blog .comment-form-wrapper,
   .pagination {
     margin-bottom: 100px;
-    /* I added but doesn't work: */
-    text-align: left;
   }
   .grid-blog.col-2-custom.no-sidebar + .pagination,
   .grid-blog.col-3-custom.no-sidebar + .pagination {
@@ -5885,8 +5865,6 @@ input:focus:-ms-input-placeholder {
   .blog.no-sidebar #comments,
   .blog.no-sidebar .pagination,
   .blog.no-sidebar .comment-form-wrapper {
-    /* I added but doesn't work: */
-    text-align: left;
     width: 100%;
   }
   .blog.no-sidebar .pagination ul {

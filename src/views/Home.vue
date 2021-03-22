@@ -1,451 +1,332 @@
 <template>
   <div class="home">
     <!-- when add bootstrap, look at : https://www.w3schools.com/bootstrap/bootstrap_button_groups.asp -->
+    <!-- ============================================================= SECTION – BUTTONS ============================================================= -->
 
-    <!-- ============================================================= SECTION – POPULAR POSTS ============================================================= -->
-
-    <section id="popular-posts" class="light-bg">
-      <div class="container inner-top-md">
+    <section id="buttons">
+      <div class="container">
         <div class="row">
-          <div class="col-md-12">
-            <div id="accordion-popular-posts" class="panel-group">
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h4 class="panel-title">
-                    <a class="panel-toggle collapsed" href="#content-popular-posts" data-toggle="collapse">
-                      <span>Popular posts</span>
-                    </a>
-                  </h4>
-                </div>
-                <!-- /.panel-heading -->
-
-                <div id="content-popular-posts" class="panel-collapse collapse" data-parent="#accordion-popular-posts">
-                  <div class="panel-body">
-                    <div id="owl-popular-posts" class="owl-carousel owl-item-gap-sm">
-                      <div class="item">
-                        <a href="blog-post.html">
-                          <figure>
-                            <figcaption class="text-overlay">
-                              <div class="info">
-                                <h4>Vintage Bicycles</h4>
-                                <p>Interactive</p>
-                              </div>
-                              <!-- /.info -->
-                            </figcaption>
-                            <img src="//assets/images/art/work03.jpg" alt="" />
-                          </figure>
-                        </a>
-                      </div>
-                      <!-- /.item -->
-
-                      <div class="item">
-                        <a href="blog-post.html">
-                          <figure>
-                            <figcaption class="text-overlay">
-                              <div class="info">
-                                <h4>Simpli Nota</h4>
-                                <p>Identity</p>
-                              </div>
-                              <!-- /.info -->
-                            </figcaption>
-                            <img src="/assets/images/art/work04.jpg" alt="" />
-                          </figure>
-                        </a>
-                      </div>
-                      <!-- /.item -->
-
-                      <div class="item">
-                        <a href="blog-post.html">
-                          <figure>
-                            <figcaption class="text-overlay">
-                              <div class="info">
-                                <h4>Vinyl Records</h4>
-                                <p>Identity</p>
-                              </div>
-                              <!-- /.info -->
-                            </figcaption>
-                            <img src="/assets/images/art/work07.jpg" alt="" />
-                          </figure>
-                        </a>
-                      </div>
-                      <!-- /.item -->
-
-                      <div class="item">
-                        <a href="blog-post.html">
-                          <figure>
-                            <figcaption class="text-overlay">
-                              <div class="info">
-                                <h4>Astor & Yancy</h4>
-                                <p>Identity</p>
-                              </div>
-                              <!-- /.info -->
-                            </figcaption>
-                            <img src="/assets/images/art/work09.jpg" alt="" />
-                          </figure>
-                        </a>
-                      </div>
-                      <!-- /.item -->
-
-                      <div class="item">
-                        <a href="blog-post.html">
-                          <figure>
-                            <figcaption class="text-overlay">
-                              <div class="info">
-                                <h4>Signwall</h4>
-                                <p>Identity</p>
-                              </div>
-                              <!-- /.info -->
-                            </figcaption>
-                            <img src="/assets/images/art/work16.jpg" alt="" />
-                          </figure>
-                        </a>
-                      </div>
-                      <!-- /.item -->
-
-                      <div class="item">
-                        <a href="blog-post.html">
-                          <figure>
-                            <figcaption class="text-overlay">
-                              <div class="info">
-                                <h4>Tri Fold Brochure</h4>
-                                <p>Print</p>
-                              </div>
-                              <!-- /.info -->
-                            </figcaption>
-                            <img src="/assets/images/art/work10.jpg" alt="" />
-                          </figure>
-                        </a>
-                      </div>
-                      <!-- /.item -->
-
-                      <div class="item">
-                        <a href="blog-post.html">
-                          <figure>
-                            <figcaption class="text-overlay">
-                              <div class="info">
-                                <h4>Embroidered</h4>
-                                <p>Identity</p>
-                              </div>
-                              <!-- /.info -->
-                            </figcaption>
-                            <img src="/assets/images/art/work05a.jpg" alt="" />
-                          </figure>
-                        </a>
-                      </div>
-                      <!-- /.item -->
-
-                      <div class="item">
-                        <a href="blog-post.html">
-                          <figure>
-                            <figcaption class="text-overlay">
-                              <div class="info">
-                                <h4>El Corcho</h4>
-                                <p>Identity</p>
-                              </div>
-                              <!-- /.info -->
-                            </figcaption>
-                            <img src="/assets/images/art/work12.jpg" alt="" />
-                          </figure>
-                        </a>
-                      </div>
-                      <!-- /.item -->
-                    </div>
-                    <!-- /.owl-carousel -->
-                  </div>
-                  <!-- /.panel-body -->
-                </div>
-                <!-- /.content -->
-              </div>
-              <!-- /.panel -->
+          <div class="col-lg-10 mx-auto text-center">
+            <div class="btn-wrapper">
+              <button
+                class="btn btn-large btn-green"
+                v-on:click="
+                  sortAttribute = 'created_at';
+                  sortOrder = -1;
+                "
+              >
+                Sort by date
+              </button>
+              <button
+                class="btn btn-large btn-green"
+                v-on:click="
+                  sortAttribute = 'claps';
+                  sortOrder = -1;
+                "
+              >
+                Sort by popularity
+              </button>
             </div>
-            <!-- /.panel-group -->
           </div>
-          <!-- /.col -->
+          <!-- ./col -->
         </div>
         <!-- /.row -->
       </div>
       <!-- /.container -->
     </section>
-    <div>
-      <button
-        v-on:click="
-          sortAttribute = 'created_at';
-          sortOrder = -1;
-        "
-      >
-        Sort by date
-      </button>
-      <button
-        v-on:click="
-          sortAttribute = 'claps';
-          sortOrder = -1;
-        "
-      >
-        Sort by popularity
-      </button>
-    </div>
 
-    <!-- ============================================================= SECTION – POPULAR POSTS : END ============================================================= -->
+    <!-- ============================================================= SECTION – BUTTONS : END ============================================================= -->
 
     <!-- ============================================================= SECTION – BLOG POST ============================================================= -->
 
     <section id="blog-post" class="light-bg">
-      <div
-        v-for="post in orderBy(filterBy(posts, filter), sortAttribute, sortOrder)"
-        v-bind:key="post.id"
-        class="container inner-top-sm inner-bottom classic-blog"
-      >
-        <div class="row">
-          <div class="col-lg-9 inner-right-sm">
-            <div class="sidemeta">
-              <div class="post format-gallery">
-                <div class="date-wrapper">
-                  <div class="date">
-                    <span class="month">{{ dayOfTheWeek(post.created_at) }}</span>
-                    <span class="day">{{ formattedDay(post.created_at) }}</span>
-                    <span class="month">{{ formattedMonth(post.created_at) }}</span>
+      <div class="container inner-top-sm inner-bottom classic-blog">
+        <div class="row inner-bottom-xs">
+          <div class="col-md-12">
+            <ul class="format-filter text-center">
+              <li>
+                <a class="active" href="#" data-filter="*" title="All" data-rel="tooltip" data-placement="top">
+                  <i class="icon-th"></i>
+                </a>
+              </li>
+              <li>
+                <a href="#" data-filter=".format-standard" title="Standard" data-rel="tooltip" data-placement="top">
+                  <i class="icon-edit"></i>
+                </a>
+              </li>
+              <li>
+                <a href="#" data-filter=".format-image" title="Image" data-rel="tooltip" data-placement="top">
+                  <i class="icon-picture-1"></i>
+                </a>
+              </li>
+              <li>
+                <a href="#" data-filter=".format-gallery" title="Gallery" data-rel="tooltip" data-placement="top">
+                  <i class="icon-picture"></i>
+                </a>
+              </li>
+              <li>
+                <a href="#" data-filter=".format-video" title="Video" data-rel="tooltip" data-placement="top">
+                  <i class="icon-video-1"></i>
+                </a>
+              </li>
+              <li>
+                <a href="#" data-filter=".format-audio" title="Audio" data-rel="tooltip" data-placement="top">
+                  <i class="icon-music-1"></i>
+                </a>
+              </li>
+              <li>
+                <a href="#" data-filter=".format-quote" title="Quote" data-rel="tooltip" data-placement="top">
+                  <i class="icon-quote"></i>
+                </a>
+              </li>
+              <li>
+                <a href="#" data-filter=".format-link" title="Link" data-rel="tooltip" data-placement="top">
+                  <i class="icon-popup"></i>
+                </a>
+              </li>
+            </ul>
+            <!-- /.format-filter -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+        <div
+          v-for="post in orderBy(filterBy(posts, filter), sortAttribute, sortOrder)"
+          v-bind:key="post.id"
+          class="container inner-top-sm inner-bottom classic-blog"
+        >
+          <div class="row">
+            <div class="col-lg-9 inner-right-sm inner-left-sm">
+              <div class="posts sidemeta">
+                <div class="post format-gallery">
+                  <div class="date-wrapper">
+                    <div class="date">
+                      <span class="month">{{ dayOfTheWeek(post.created_at) }}</span>
+                      <span class="day">{{ formattedDay(post.created_at) }}</span>
+                      <span class="month">{{ formattedMonth(post.created_at) }}</span>
+                    </div>
+                    <!-- /.date -->
                   </div>
-                  <!-- /.date -->
-                </div>
-                <!-- /.date-wrapper -->
+                  <!-- /.date-wrapper -->
 
-                <div class="post-content" data-rel="tooltip" data-placement="left">
-                  <router-link :to="`/posts/${post.id}`">
-                    <h1 class="post-title">{{ post.title }}</h1>
-                    <h3 class="author"></h3>
-                  </router-link>
-                  <router-link :to="`/users/${post.user.id}`">
-                    <h3>
-                      by
-                      {{ post.user.user_name }}
-                    </h3>
-                  </router-link>
+                  <div class="post-content">
+                    <figure class="icon-overlay icn-link post-media"></figure>
+                    <!-- /.post-media -->
 
-                  <h4>
-                    {{ relativeDate(post.created_at) }}
-                  </h4>
-
-                  <ul class="meta" v-if="post.tags">
-                    <li class="categories" v-for="tag in post.tags" v-bind:key="tag.id">
-                      {{ tag.name, }}
-                    </li>
-                    <li v-on:click="addClap(post)" class="likes">
-                      {{ post.claps }}
-                    </li>
-                    <!-- <a href="#">Identity</a>
-                      ,
-                      <a href="#">Graphic Design</a> -->
-                  </ul>
-                  <ul class="meta" v-if="post.comments">
-                    <li class="comments" v-for="comment in post.comments" v-bind:key="comment.id">
-                      <!-- post.comments.anything doesn't work here even if it works elsewhere in code, adding  v-if="post.comment" to li doesn't work -->
-                      {{ comment.id }}
-                    </li>
-                  </ul>
-                  <figure>
-                    <img v-bind:src="post.image_url" class="" alt="" />
-                  </figure>
-
-                  <!-- /.meta -->
-
-                  <p>
-                    {{ post.body }}
-                  </p>
-                </div>
-                <!-- /.post-content -->
-              </div>
-              <!-- /.post -->
-
-              <div class="post-author">
-                <figure>
-                  <div class="author-image icon-overlay icn-link">
-                    <router-link :to="`/users/${post.user.id}`">
-                      <img v-bind:src="post.user.image_url" class="" alt="" />
+                    <router-link :to="`/posts/${post.id}`">
+                      <h2 class="post-title inner-left">{{ post.title }}</h2>
+                      <h3 data-rel="tooltip" data-placement="" class="author"></h3>
                     </router-link>
-                  </div>
-
-                  <figcaption class="author-details">
-                    <h3>{{ post.user.user_name }}</h3>
                     <router-link :to="`/users/${post.user.id}`">
-                      <p>
+                      <h4 class="inner-left">
+                        by
                         {{ post.user.user_name }}
-                        {{ post.user.bio }}
-                      </p>
+                      </h4>
                     </router-link>
+
+                    <h4>
+                      {{ relativeDate(post.created_at) }}
+                    </h4>
                     <ul class="meta">
-                      <li class="author-posts">
-                        <a href="#">All posts by {{ post.user.user_name }}</a>
+                      <li class="categories">
+                        <a href="#" v-for="tag in post.tags" v-bind:key="tag.id">| {{ tag.name }} |</a>
                       </li>
+                      <li v-on:click="addClap()" class="likes">
+                        <a href="#">{{ post.claps }}</a>
+                      </li>
+                      <li class="comments" v-if="post.comment">
+                        <a href="#">{{ post.comment.id }}</a>
+                      </li>
+                      <li class="comments" v-else><a href="#">0</a></li>
                     </ul>
+                    <figure>
+                      <img v-bind:src="post.image_url" class="" alt="" />
+                    </figure>
+
                     <!-- /.meta -->
-                  </figcaption>
-                </figure>
-              </div>
-              <!-- /.post-author -->
 
-              <div id="comments" v-if="gif.small_gif">
-                <h2>Top Gifs</h2>
-                <ol class="commentlist">
-                  <li class="comment" v-for="gif in gifs" v-bind:key="gif.small_gif">
-                    <div class="avatar icon-overlay icn-link" img v-bind:src="gif.small_gif" alt=""></div>
-                  </li>
-                </ol>
-              </div>
+                    <p>
+                      {{ post.body }}
+                    </p>
+                  </div>
+                  <!-- /.post-content -->
+                </div>
+                <!-- /.post -->
 
-              <div id="comments" v-if="post.comment">
-                <h2>Top Comment</h2>
-                <ol class="commentlist">
-                  <li class="comment">
-                    <div class="avatar icon-overlay icn-link" img v-bind:src="post.comment.user.image_url" alt=""></div>
-                    <!-- /.avatar -->
+                <div class="post-author">
+                  <figure>
+                    <div class="author-image icon-overlay icn-link">
+                      <router-link :to="`/users/${post.user.id}`">
+                        <img v-bind:src="post.user.image_url" class="" alt="" />
+                      </router-link>
+                    </div>
 
-                    <div class="commentbody">
-                      Comment: {{ post.comment.body }}
-                      <div class="author">
-                        <h3>name:{{ post.comment.user.user_name }}</h3>
-                        <div class="meta">
-                          <span class="date">{{ relativeDate(post.comment.created_at) }}</span>
-                        </div>
-                        <!-- /.meta -->
-                      </div>
-                      <!-- /.author -->
+                    <figcaption class="author-details">
+                      <h3>{{ post.user.user_name }}</h3>
+                      <router-link :to="`/users/${post.user.id}`">
+                        <p>
+                          {{ post.user.bio }}
+                        </p>
+                      </router-link>
+                      <ul class="meta">
+                        <li class="author-posts">
+                          <a href="#">All posts by {{ post.user.user_name }}</a>
+                        </li>
+                      </ul>
+                      <!-- /.meta -->
+                    </figcaption>
+                  </figure>
+                </div>
+                <!-- /.post-author -->
 
-                      <div class="message">
+                <div id="comments" v-if="gif.small_gif">
+                  <h2>Top Gifs</h2>
+                  <ol class="commentlist">
+                    <li class="comment" v-for="gif in gifs" v-bind:key="gif.small_gif">
+                      <div class="avatar icon-overlay icn-link" img v-bind:src="gif.small_gif" alt=""></div>
+                    </li>
+                  </ol>
+                </div>
+
+                <div id="comments" v-if="post.comment">
+                  <h2>Top Comment</h2>
+                  <ol class="commentlist">
+                    <li class="comment">
+                      <div
+                        class="avatar icon-overlay icn-link"
+                        img
+                        v-bind:src="post.comment.user.image_url"
+                        alt=""
+                      ></div>
+                      <!-- /.avatar -->
+
+                      <div class="commentbody">
                         <p>
                           {{ post.comment.body }}
                         </p>
+                        <div class="author">
+                          <h4>by {{ post.comment.user.user_name }}</h4>
+                          <div class="meta">
+                            <span class="date">{{ relativeDate(post.comment.created_at) }}</span>
+                          </div>
+                          <!-- /.meta -->
+                        </div>
+                        <!-- /.author -->
+
+                        <!-- /.message -->
                       </div>
-                      <!-- /.message -->
-                    </div>
-                    <!-- /.commentbody -->
-                  </li>
-                  <!-- /.comment -->
-                </ol>
-                <!-- /.commentlist -->
-              </div>
-              <!-- /#comments -->
-
-              <div class="comment-form-wrapper">
-                <h2>Leave a Comment</h2>
-
-                <form id="commentform" class="forms" action="" method="post">
-                  <p v-if="!$parent.isLoggedIn()">
-                    Please
-                    <router-link to="/login">log in</router-link>
-                    to leave a comment!
-                  </p>
-
-                  <div class="row">
-                    <div class="col-md-12">
-                      <textarea
-                        name="message"
-                        class="form-control"
-                        v-model="body"
-                        placeholder="Enter your comment ..."
-                      ></textarea>
-                    </div>
-                    <!-- /.col -->
-                  </div>
-                  <!-- /.row -->
-                  <div class="row">
-                    <div class="col-md-12">
-                      <textarea
-                        name="image"
-                        class="form-control"
-                        v-model="imageUrl"
-                        placeholder="Enter an image... (optional)"
-                      ></textarea>
-                    </div>
-                    <!-- /.col -->
-                  </div>
-                  <!-- /.row -->
-
-                  <button v-on:submit.prevent="createComment(post)" type="submit" class="btn btn-submit">
-                    Submit comment
-                  </button>
-                </form>
-
-                <div id="response"></div>
-              </div>
-              <!-- /.comment-form-wrapper -->
-            </div>
-            <!-- /.sidemeta -->
-          </div>
-          <!-- /.col -->
-
-          <aside class="col-lg-3">
-            <div class="sidebox widget">
-              <h4>Search Posts</h4>
-
-              <form id="search" class="navbar-form search" role="search">
-                <input type="search" v-model="filter" class="form-control" placeholder="Type to search" />
-                <!-- <button type="submit" class="btn btn-submit icon-right-open"></button> -->
-              </form>
-            </div>
-            <!-- /.widget -->
-
-            <div class="sidebox widget">
-              <h4>Categories</h4>
-
-              <ul v-for="tag in tags" v-bind="tag.name" :key="tag.name" class="circled">
-                <li id="tag.name" name="tag" value="tag.name">
-                  <a href="#">{{ tag.name }}</a>
-                </li>
-              </ul>
-              <!-- /.circled -->
-            </div>
-            <!-- /.widget -->
-
-            <div class="sidebox widget">
-              <h4>Archives</h4>
-
-              <ul class="circled">
-                <li><a href="#">March 2015</a></li>
-                <li><a href="#">February 2015</a></li>
-                <li><a href="#">January 2015</a></li>
-                <li><a href="#">December 2013</a></li>
-                <li><a href="#">November 2013</a></li>
-                <li><a href="#">October 2013</a></li>
-              </ul>
-              <!-- /.circled -->
-
-              <a href="#" class="txt-btn">All archives</a>
-            </div>
-            <!-- /.widget -->
-
-            <div class="sidebox widget">
-              <h4>Resources</h4>
-
-              <figure>
-                <div class="icon-overlay icn-link">
-                  <a href="blog-post.html"><img src="/assets/images/art/work01.jpg" alt="" /></a>
+                      <!-- /.commentbody -->
+                    </li>
+                    <!-- /.comment -->
+                  </ol>
+                  <!-- /.commentlist -->
                 </div>
-                <!-- /.icon-overlay -->
+                <!-- /#comments -->
 
-                <figcaption class="bordered no-top-border">
-                  <div class="info">
-                    <h4><a href="blog-post.html">Appscreen Dashboard</a></h4>
-                    <p>Interactive</p>
-                  </div>
-                  <!-- /.info -->
-                </figcaption>
-              </figure>
+                <div class="comment-form-wrapper">
+                  <h2>Leave a Comment</h2>
+
+                  <form id="commentform" class="forms" action="" method="post">
+                    <p v-if="!$parent.isLoggedIn()">
+                      Please
+                      <router-link to="/login">log in</router-link>
+                      to leave a comment!
+                    </p>
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <input
+                          type="text"
+                          name="message"
+                          class="form-control"
+                          v-model="body"
+                          placeholder="Enter your comment ..."
+                        />
+                      </div>
+                      <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <input
+                          type="text"
+                          class="form-control"
+                          v-model="imageUrl"
+                          placeholder="Enter an image... (optional)"
+                        />
+                      </div>
+                      <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+
+                    <button v-on:submit.prevent="createComment(post)" type="submit" class="btn btn-submit">
+                      Submit comment
+                    </button>
+                  </form>
+
+                  <div id="response"></div>
+                </div>
+                <!-- /.comment-form-wrapper -->
+              </div>
+              <!-- /.sidemeta -->
             </div>
-            <!-- /.widget -->
-          </aside>
+            <!-- /.col -->
+
+            <aside class="col-lg-3">
+              <div class="sidebox widget">
+                <h4>Search Posts</h4>
+
+                <form id="search" class="navbar-form search" role="search">
+                  <input type="search" v-model="filter" class="form-control" placeholder="Type to search" />
+                  <!-- <button type="submit" class="btn btn-submit icon-right-open"></button> -->
+                </form>
+              </div>
+              <!-- /.widget -->
+
+              <div class="sidebox widget">
+                <h4>Categories</h4>
+
+                <ul v-for="tag in tags" v-bind="tag.name" :key="tag.name" class="circled">
+                  <li id="tag.name" name="tag" value="tag.name">
+                    <a href="#">{{ tag.name }}</a>
+                  </li>
+                </ul>
+                <!-- /.circled -->
+              </div>
+              <!-- /.widget -->
+
+              <div class="sidebox widget">
+                <h4>Archives</h4>
+
+                <ul class="circled">
+                  <li><a href="#">March 2015</a></li>
+                  <li><a href="#">February 2015</a></li>
+                  <li><a href="#">January 2015</a></li>
+                  <li><a href="#">December 2013</a></li>
+                  <li><a href="#">November 2013</a></li>
+                  <li><a href="#">October 2013</a></li>
+                </ul>
+                <!-- /.circled -->
+
+                <a href="#" class="txt-btn">All archives</a>
+              </div>
+              <!-- /.widget -->
+            </aside>
+          </div>
+          <!-- /.row -->
         </div>
-        <!-- /.row -->
+        <!-- /.container -->
       </div>
-      <!-- /.container -->
     </section>
 
     <!-- ============================================================= SECTION – BLOG POST : END ============================================================= -->
-    <div class="checkbox">
+    <!-- <div class="checkbox">
       <div v-for="tag in tags" v-bind="tag.name" :key="tag.name">
         <input type="checkbox" id="tag.name" name="tag" value="tag.name" />
         <label for="tag.name">{{ tag.name }}</label>
       </div>
-    </div>
+    </div> -->
     <!-- <div>
       <button
         v-on:click="
@@ -464,7 +345,7 @@
         Sort by popularity
       </button>
     </div> -->
-    <div>
+    <!-- <div>
       <input type="text" v-model="filter" />
     </div>
     <div v-for="post in orderBy(filterBy(posts, filter), sortAttribute, sortOrder)" v-bind:key="post.id">
@@ -492,9 +373,9 @@
         </div>
       </div>
       <div v-if="post.comment">
-        Comment: {{ post.comment.body }}
-        <!-- comment relativeDate shorts out page- idk why      ? -->
-        <p>{{ relativeDate(post.comment.created_at) }}</p>
+        Comment: {{ post.comment.body }}-->
+    <!-- comment relativeDate shorts out page- idk why      ? -->
+    <!--<p>{{ relativeDate(post.comment.created_at) }}</p>
         <p v-if="post.comment.user">
           name:{{ post.comment.user.user_name }} pic:
           <img v-bind:src="post.comment.user.image_url" class="" alt="" />
@@ -524,13 +405,17 @@
         <input type="submit" class="btn btn-primary" value="Submit" />
         <router-view />
       </form>
-    </div>
+    </div> -->
   </div>
 
   <!-- edit and delete buttons for comment owner </div> -->
 </template>
 
-<style></style>
+<style>
+#blog-post {
+  margin: auto;
+}
+</style>
 
 <script>
 import axios from "axios";

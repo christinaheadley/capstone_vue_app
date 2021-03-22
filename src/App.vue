@@ -4,6 +4,28 @@
 
     <header>
       <div class="navbar">
+        <div class="navbar-header">
+          <div class="container">
+            <!-- ============================================================= LOGO MOBILE ============================================================= -->
+
+            <a class="navbar-brand" href="index.html">
+              <img src="/assets/images/social_recoverwe_logo.png" class="logo" alt="" />
+            </a>
+
+            <!-- ============================================================= LOGO MOBILE : END ============================================================= -->
+
+            <a
+              class="navbar-toggler btn responsive-menu float-right"
+              data-toggle="collapse"
+              data-target=".navbar-collapse"
+            >
+              <i class="icon-menu-1"></i>
+            </a>
+          </div>
+          <!-- /.container -->
+        </div>
+        <!-- /.navbar-header -->
+
         <div class="yamm">
           <div class="navbar-collapse collapse">
             <div class="container">
@@ -18,9 +40,11 @@
               <!-- ============================================================= MAIN NAVIGATION ============================================================= -->
 
               <ul class="nav navbar-nav">
-                <li>
-                  <router-link to="/">Home</router-link>
+                <li class="dropdown">
+                  <router-link to="/" class="dropdown-toggle" data-toggle="dropdown">Home</router-link>
                 </li>
+                <!-- /.dropdown -->
+
                 <li>
                   <router-link to="/about">About</router-link>
                 </li>
@@ -40,6 +64,8 @@
                 <li v-if="isLoggedIn()">
                   <router-link to="/logout">Logout</router-link>
                 </li>
+
+                <!-- /.dropdown -->
               </ul>
               <!-- /.nav -->
 
