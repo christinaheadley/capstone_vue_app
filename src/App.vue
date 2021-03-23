@@ -115,7 +115,7 @@
           <div class="col-lg-6 col-md-6 inner">
             <h4>Get In Touch</h4>
             <p>
-              Site owner
+              Site owner: Christina Headley
             </p>
             <ul class="contacts">
               <li>
@@ -129,7 +129,7 @@
               <li>
                 <a href="#">
                   <i class="icon-mail-1 contact"></i>
-                  chrstnaheadley@gmai.com
+                  chrstnaheadley@gmail.com
                 </a>
               </li>
             </ul>
@@ -145,12 +145,12 @@
         <div class="container inner clearfix">
           <p class="float-left">© 2019 REEN. All rights reserved.</p>
           <ul class="footer-menu float-right">
-            <li><a href="index.html">Home</a></li>
+            <li><router-link to="/">Home</router-link></li>
             <li><a href="portfolio.html">Portfolio</a></li>
-            <li><a href="blog.html">Blog</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><router-link to="/">All Posts</router-link></li>
+            <li><router-link to="/about">About</router-link></li>
+            <li><router-link :to="`/users/${getUserId()}`">Account</router-link></li>
+            <li><router-link to="/">Contact</router-link></li>
           </ul>
           <!-- .footer-menu -->
         </div>

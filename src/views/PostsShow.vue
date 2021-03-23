@@ -63,6 +63,7 @@
                       <p>
                         {{ post.user.user_name }}
                         {{ post.user.bio }}
+                        {{ post.user.location }}
                       </p>
                     </router-link>
                     <ul class="meta">
@@ -146,9 +147,9 @@
                         class="form-control"
                         placeholder="Add search term to add GIF"
                       />
-                      <span v-if="gifSearchTerm" href="#modal-work03" data-toggle="modal" v-on:click="viewGifs()">
+                      <a v-if="gifSearchTerm" href="#modal-work03" data-toggle="modal" v-on:click="viewGifs()">
                         Select GIF
-                      </span>
+                      </a>
                     </div>
                     <!-- /.col -->
                     <img src="/assets/images/giphy.png" class="" alt="GIPHY attribution for GIFs" />

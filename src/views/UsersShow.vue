@@ -1,21 +1,50 @@
 <template>
   <div class="users-show">
-    <!-- <img src="../../src/assets/images/Social_RecoverWe_logo.png" /> -->
-    <h2>{{ user.user_name }}</h2>
-    <p v-if="user.id == $parent.getUserId()">{{ user.email }}</p>
-    <img v-bind:src="user.image_url" class="" alt="" />
-    <p>{{ user.bio }}</p>
-    <p>{{ user.location }}</p>
-    <div v-if="user.id == $parent.getUserId()">
-      <router-link :to="`/users/${user.id}/edit`">
-        <button>Edit Profile</button>
-      </router-link>
-      <button v-on:click="destroyUser()">Delete</button>
-    </div>
+    <!-- ============================================================= SECTION – WORK SAMPLES ============================================================= -->
+
+    <section id="work-samples" class="dark-bg">
+      <div class="container inner">
+        <div class="row">
+          <div class="col-md-6 inner-right-xs text-right">
+            <figure><img v-bind:src="user.image_url" class="" alt="" /></figure>
+          </div>
+          <!-- /.col -->
+
+          <div class="col-md-6 inner-top-xs inner-left-xs">
+            <h1>{{ user.user_name }}</h1>
+            <h4>{{ user.bio }}</h4>
+            <h3>{{ user.location }}</h3>
+            <div v-if="user.id == $parent.getUserId()">
+              <router-link :to="`/users/${user.id}/edit`">
+                <button class="btn btn-gray">Edit Profile</button>
+              </router-link>
+              &nbsp;
+              <button class="btn btn-gray" v-on:click="destroyUser()">Delete</button>
+            </div>
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+        <div class="row inner-top-sm">
+          <div class="col-md-12"></div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container -->
+    </section>
+
+    <!-- ============================================================= SECTION – WORK SAMPLES : END ============================================================= -->
   </div>
 </template>
 
-<style></style>
+<style>
+img {
+  max-width: 60%;
+  height: auto;
+}
+</style>
 
 <script>
 import axios from "axios";

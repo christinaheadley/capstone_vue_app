@@ -6,26 +6,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-10 mx-auto text-center">
-            <div class="btn-wrapper">
-              <button
-                class="btn btn-large btn-green"
-                v-on:click="
-                  sortAttribute = 'created_at';
-                  sortOrder = -1;
-                "
-              >
-                Sort by date
-              </button>
-              <button
-                class="btn btn-large btn-green"
-                v-on:click="
-                  sortAttribute = 'claps';
-                  sortOrder = -1;
-                "
-              >
-                Sort by popularity
-              </button>
-            </div>
+            <div class="btn-wrapper"></div>
           </div>
           <!-- ./col -->
         </div>
@@ -44,44 +25,26 @@
           <div class="col-md-12">
             <ul class="format-filter text-center">
               <li>
-                <a class="active" href="#" data-filter="*" title="All" data-rel="tooltip" data-placement="top">
-                  <i class="icon-th"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#" data-filter=".format-standard" title="Standard" data-rel="tooltip" data-placement="top">
-                  <i class="icon-edit"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#" data-filter=".format-image" title="Image" data-rel="tooltip" data-placement="top">
-                  <i class="icon-picture-1"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#" data-filter=".format-gallery" title="Gallery" data-rel="tooltip" data-placement="top">
-                  <i class="icon-picture"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#" data-filter=".format-video" title="Video" data-rel="tooltip" data-placement="top">
-                  <i class="icon-video-1"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#" data-filter=".format-audio" title="Audio" data-rel="tooltip" data-placement="top">
-                  <i class="icon-music-1"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#" data-filter=".format-quote" title="Quote" data-rel="tooltip" data-placement="top">
-                  <i class="icon-quote"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#" data-filter=".format-link" title="Link" data-rel="tooltip" data-placement="top">
-                  <i class="icon-popup"></i>
-                </a>
+                <button
+                  class="btn btn-large btn-green"
+                  v-on:click="
+                    sortAttribute = 'created_at';
+                    sortOrder = -1;
+                  "
+                >
+                  Sort by date
+                </button>
+                &nbsp;
+
+                <button
+                  class="btn btn-large btn-green"
+                  v-on:click="
+                    sortAttribute = 'claps';
+                    sortOrder = -1;
+                  "
+                >
+                  Sort by popularity
+                </button>
               </li>
             </ul>
             <!-- /.format-filter -->
@@ -166,6 +129,9 @@
                       <router-link :to="`/users/${post.user.id}`">
                         <p>
                           {{ post.user.bio }}
+                        </p>
+                        <p>
+                          {{ post.user.location }}
                         </p>
                       </router-link>
                       <ul class="meta">
@@ -258,12 +224,12 @@
                           class="form-control"
                           placeholder="Add search term to add GIF"
                         />
-                        <span v-if="gifSearchTerm" href="#modal-work03" data-toggle="modal" v-on:click="viewGifs()">
+                        <a v-if="gifSearchTerm" href="#modal-work03" data-toggle="modal" v-on:click="viewGifs()">
                           Select GIF
-                        </span>
-                        <img src="/assets/images/giphy.png" class="" alt="GIPHY attribution for GIFs" />
+                        </a>
                       </div>
                       <!-- /.col -->
+                      <img src="/assets/images/giphy.png" class="" alt="GIPHY attribution for GIFs" />
                     </div>
                     <!-- /.row -->
 
@@ -464,7 +430,7 @@ export default {
         body: this.body,
         image_url: this.imageUrl,
         gif_url: this.gifUrl,
-        post_id: this.postId,
+        post_id: this.post.id,
       };
       axios
         .post("/api/comments", params)
@@ -489,10 +455,11 @@ export default {
         });
       }
     },
-    viewGifs: function() {
+    viewGifs: function(post) {
       axios.get(`/api/gifs/search?search_term=${this.gifSearchTerm}`).then(response => {
         this.gifs = response.data;
         console.log(this.gifs);
+        console.log(post);
       });
     },
     // trendGifs: function() {
