@@ -7,15 +7,10 @@
         <div class="row">
           <div class="col-md-6 inner-top inner-right-xs inner-bottom-xs">
             <figure><img v-bind:src="user.image_url" class="" alt="" /></figure>
-            <div v-if="user.id == $parent.getUserId()">
-              <button class="btn btn-large btn-red align-center" v-on:click="destroyUser()">
-                Delete
-              </button>
-            </div>
           </div>
           <!-- /.col -->
           <div class="col-lg-6 inner-right-xs inner-bottom-xs">
-            <form v-on:submit.prevent="updateUser()">
+            <form v-on:submit.prevent="updateUser(user)">
               <h1>Edit Profile:</h1>
               <ul>
                 <li class="text-danger" v-for="error in errors" v-bind:key="error">
@@ -24,43 +19,39 @@
               </ul>
               <div class="form-group">
                 <label>User Name:</label>
-                <input type="text" class="form-control" v-model="user.user_name" />
+                <input type="text" autocomplete="on" class="form-control" v-model="user.user_name" />
               </div>
               <div class="form-group">
                 <label>Email:</label>
-                <input type="email" class="form-control" v-model="user.email" />
+                <input type="email" autocomplete="on" class="form-control" v-model="user.email" />
               </div>
               <div class="form-group">
                 <label>Password:</label>
-                <input type="password" class="form-control" v-model="user.password" />
+                <input type="password" autocomplete="on" class="form-control" v-model="user.password" />
               </div>
               <div class="form-group">
                 <label>Confirm Password:</label>
-                <input type="password" class="form-control" v-model="user.password_confirmation" />
+                <input type="password" autocomplete="on" class="form-control" v-model="user.password_confirmation" />
               </div>
 
               <div class="form-group">
                 <label>Bio:</label>
-                <input type="text" class="form-control" v-model="user.bio" />
+                <input type="text" autocomplete="on" class="form-control" v-model="user.bio" />
               </div>
               <div class="form-group">
                 <label>Location:</label>
-                <input type="text" class="form-control" v-model="user.location" />
+                <input type="text" autocomplete="on" class="form-control" v-model="user.location" />
               </div>
               <div class="form-group">
                 <label>Image:</label>
-                <input type="text" class="form-control" v-model="user.image_url" />
+                <input type="text" autocomplete="on" class="form-control" v-model="user.image_url" />
               </div>
+              <input type="submit" class="btn btn-green" value="Submit" />
+              <button v-on:click="destroyUser(user)" class="btn btn-large btn-red align-center">
+                Delete Account
+              </button>
             </form>
-            <input type="submit" class="btn btn-primary" value="Submit" />
           </div>
-
-          <!--</.col -->
-          <!-- </div> -->
-          <!-- /.row -->
-
-          <!-- <div class="row inner-top-sm">
-          <div class="col-md-12"></div> -->
           <!-- /.col -->
         </div>
         <!-- /.row -->
@@ -93,15 +84,15 @@ export default {
     });
   },
   methods: {
-    updateUser: function() {
+    updateUser: function(user) {
       let params = {
-        user_name: this.userName,
-        body: this.body,
-        image_url: this.imageUrl,
-        password: this.password,
-        password_confirmation: this.passwordConfirmation,
-        bio: this.bio,
-        location: this.location,
+        user_name: user.userName,
+        body: user.body,
+        image_url: user.imageUrl,
+        password: user.password,
+        password_confirmation: user.passwordConfirmation,
+        bio: user.bio,
+        location: user.location,
       };
       axios
         .patch(`/api/users/${this.user.id}`, params)
@@ -115,17 +106,15 @@ export default {
           this.status = error.response.status;
         });
     },
-    methods: {
-      destroyUser: function() {
-        if (confirm("Do you want to delete your profile?")) {
-          axios.delete(`api/users/${this.user.id}`).then(response => {
-            console.log(response.data);
-            this.$parent.flashMessage = "Profile successfully deleted!";
-            this.$router.push("/");
-            // enter logout stuff here
-          });
-        }
-      },
+    destroyUser: function(user) {
+      if (confirm("Do you want to delete your profile?")) {
+        axios.delete(`api/users/${this.user.id}`).then(response => {
+          console.log(response.data);
+          console.log(user);
+          this.$parent.flashMessage = "Profile successfully deleted!";
+          this.$router.push("/");
+        });
+      }
     },
   },
 };

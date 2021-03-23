@@ -1,31 +1,45 @@
 <template>
   <div class="signup">
-    <!-- <img src="../../src/assets/images/Social_RecoverWe_logo.png" /> -->
-    <form v-on:submit.prevent="submit()">
-      <h1>Signup</h1>
-      <ul>
-        <li class="text-danger" v-for="error in errors" v-bind:key="error">
-          {{ error }}
-        </li>
-      </ul>
-      <div class="form-group">
-        <label>Name:</label>
-        <input type="text" class="form-control" v-model="userName" />
+    <!-- ============================================================= SECTION – WORK SAMPLES ============================================================= -->
+
+    <section id="work-samples" class="dark-bg">
+      <div class="container inner-md">
+        <div class="row">
+          <div class="col-lg-6 inner-right-xs inner-bottom-xs">
+            <form v-on:submit.prevent="submit()">
+              <h1>Signup</h1>
+              <ul>
+                <li class="text-danger" v-for="error in errors" v-bind:key="error">
+                  {{ error }}
+                </li>
+              </ul>
+              <div class="form-group">
+                <label>Name:</label>
+                <input type="text" class="form-control" v-model="userName" />
+              </div>
+              <div class="form-group">
+                <label>Email:</label>
+                <input type="email" class="form-control" v-model="email" />
+              </div>
+              <div class="form-group">
+                <label>Password:</label>
+                <input type="password" class="form-control" v-model="password" />
+              </div>
+              <div class="form-group">
+                <label>Password confirmation:</label>
+                <input type="password" class="form-control" v-model="passwordConfirmation" />
+              </div>
+              <input type="submit" class="btn btn-primary" value="Submit" />
+            </form>
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
       </div>
-      <div class="form-group">
-        <label>Email:</label>
-        <input type="email" class="form-control" v-model="email" />
-      </div>
-      <div class="form-group">
-        <label>Password:</label>
-        <input type="password" class="form-control" v-model="password" />
-      </div>
-      <div class="form-group">
-        <label>Password confirmation:</label>
-        <input type="password" class="form-control" v-model="passwordConfirmation" />
-      </div>
-      <input type="submit" class="btn btn-primary" value="Submit" />
-    </form>
+      <!-- /.container -->
+    </section>
+
+    <!-- ============================================================= SECTION – WORK SAMPLES : END =============================================================== -->
   </div>
 </template>
 

@@ -10,8 +10,9 @@
               <div class="post format-gallery">
                 <div class="date-wrapper">
                   <div class="date">
-                    <span class="day">23</span>
-                    <span class="month">May</span>
+                    <span class="month">{{ dayOfTheWeek(post.created_at) }}</span>
+                    <span class="day">{{ formattedDay(post.created_at) }}</span>
+                    <span class="month">{{ formattedMonth(post.created_at) }}</span>
                   </div>
                   <!-- /.date -->
                 </div>
@@ -145,14 +146,21 @@
                         type="text"
                         v-model="gifSearchTerm"
                         class="form-control"
-                        placeholder="Add search term to add GIF"
+                        placeholder="Type search term to view GIFs"
                       />
-                      <a v-if="gifSearchTerm" href="#modal-work03" data-toggle="modal" v-on:click="viewGifs()">
+                      <button
+                        class="btn btn-navy"
+                        v-if="gifSearchTerm"
+                        href="#modal-work03"
+                        data-toggle="modal"
+                        v-on:click="viewGifs()"
+                      >
                         Select GIF
-                      </a>
+                      </button>
+                      &nbsp;
+                      <img src="/assets/images/giphy.png" class="" alt="GIPHY attribution for GIFs" />
                     </div>
                     <!-- /.col -->
-                    <img src="/assets/images/giphy.png" class="" alt="GIPHY attribution for GIFs" />
                   </div>
                   <!-- /.row -->
 
@@ -250,6 +258,8 @@
 
 <script>
 import axios from "axios";
+import moment from "moment";
+
 export default {
   data: function() {
     return {
@@ -324,6 +334,18 @@ export default {
         this.gifs = response.data;
         console.log(this.gifs);
       });
+    },
+    relativeDate: function(date) {
+      return moment(date).fromNow();
+    },
+    dayOfTheWeek: function(date) {
+      return moment(date).format("ddd");
+    },
+    formattedMonth: function(date) {
+      return moment(date).format("MMM");
+    },
+    formattedDay: function(date) {
+      return moment(date).format("D");
     },
   },
 };

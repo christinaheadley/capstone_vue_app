@@ -371,6 +371,9 @@ main header + * {
 .inner-left {
   padding-left: 75px;
 }
+.inner-left-lg {
+  padding-left: 80px;
+}
 .inner-left-md {
   padding-left: 60px;
 }
@@ -3848,7 +3851,7 @@ input:focus:-ms-input-placeholder {
   color: #1abb9c;
   cursor: pointer;
 }
-/* .meta li.url a:before {
+.meta li.url a:before {
   content: "\f30e";
 }
 .meta li.author-posts a:before {
@@ -3867,7 +3870,7 @@ input:focus:-ms-input-placeholder {
 .meta li.likes a:after {
   content: "Likes";
   margin-left: 4px;
-} */
+}
 .meta li.url span:before {
   content: "\f30e";
 }

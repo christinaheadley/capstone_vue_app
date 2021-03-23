@@ -21,7 +21,7 @@
 
     <section id="blog-post" class="light-bg">
       <div class="container inner-top-sm inner-bottom classic-blog">
-        <div class="row inner-bottom-xs">
+        <div class="row">
           <div class="col-md-12">
             <ul class="format-filter text-center">
               <li>
@@ -77,11 +77,11 @@
                     <!-- /.post-media -->
 
                     <router-link :to="`/posts/${post.id}`">
-                      <h2 class="post-title inner-left">{{ post.title }}</h2>
+                      <h2 class="post-title inner-top-xs inner-left-lg">{{ post.title }}</h2>
                       <h3 data-rel="tooltip" data-placement="" class="author"></h3>
                     </router-link>
                     <router-link :to="`/users/${post.user.id}`">
-                      <h4 class="inner-left">
+                      <h4 class="inner-left-lg">
                         by
                         {{ post.user.user_name }}
                       </h4>
@@ -92,15 +92,18 @@
                     </h4>
                     <ul class="meta">
                       <li class="categories">
-                        <span v-for="tag in post.tags" v-bind:key="tag.id">| {{ tag.name }} |</span>
+                        <a href="#" v-for="tag in post.tags" v-bind:key="tag.id">| {{ tag.name }} |</a>
                       </li>
                       <li v-on:click="addClap(post)" class="likes">
-                        <span>{{ post.claps }}</span>
+                        <a href="#">{{ post.claps }}</a>
                       </li>
-                      <li class="comments" v-if="post.comment">
-                        <span>{{ post.comments.count }}</span>
+                      <li class="comments" v-if="!post.comment">
+                        <a href="#">0</a>
                       </li>
-                      <li class="comments" v-else><span>0</span></li>
+
+                      <li class="comments" v-else>
+                        <a href="#">{{ post.comments.length }}</a>
+                      </li>
                     </ul>
                     <figure>
                       <img v-bind:src="post.image_url" class="" alt="" />
@@ -190,7 +193,7 @@
                   </div>
                   <h2>Leave a Comment</h2>
 
-                  <form id="commentform" class="forms" v-on:submit.prevent="createComment()">
+                  <form id="commentform" class="forms" v-on:submit.prevent="createComment(post)">
                     <div class="row">
                       <div class="col-md-12">
                         <input
@@ -222,14 +225,21 @@
                           type="text"
                           v-model="gifSearchTerm"
                           class="form-control"
-                          placeholder="Add search term to add GIF"
+                          placeholder="Type search term to view GIFs"
                         />
-                        <a v-if="gifSearchTerm" href="#modal-work03" data-toggle="modal" v-on:click="viewGifs()">
+                        <button
+                          class="btn btn-navy"
+                          v-if="gifSearchTerm"
+                          href="#modal-work03"
+                          data-toggle="modal"
+                          v-on:click="viewGifs()"
+                        >
                           Select GIF
-                        </a>
+                        </button>
+                        &nbsp;
+                        <img src="/assets/images/giphy.png" class="" alt="GIPHY attribution for GIFs" />
                       </div>
                       <!-- /.col -->
-                      <img src="/assets/images/giphy.png" class="" alt="GIPHY attribution for GIFs" />
                     </div>
                     <!-- /.row -->
 
@@ -325,10 +335,10 @@
 
                 <!-- ============================================================= SECTION – BUTTONS : END ============================================================= -->
 
-                <ul v-for="tag in tags" v-bind="tag.name" :key="tag.name" class="circled">
+                <ul v-for="tag in tags" v-bind="tag.name" :key="tag.name">
                   <li id="tag.name" name="tag" value="tag.name">
                     <!-- <a v-bind:[tag]="filter">{{ tag.name }}</a> -->
-                    <button v-on:click="setFilterAttribute(tag.name)">{{ tag.name }}</button>
+                    <button class="btn btn-grn" v-on:click="setFilterAttribute(tag.name)">{{ tag.name }}</button>
                   </li>
                 </ul>
                 <!-- /.circled -->
@@ -339,12 +349,12 @@
                 <h4>Archives</h4>
 
                 <ul class="circled">
-                  <li><a href="#">March 2015</a></li>
-                  <li><a href="#">February 2015</a></li>
-                  <li><a href="#">January 2015</a></li>
-                  <li><a href="#">December 2013</a></li>
-                  <li><a href="#">November 2013</a></li>
-                  <li><a href="#">October 2013</a></li>
+                  <li><a href="#">March 2021</a></li>
+                  <li><a href="#">February 2021</a></li>
+                  <li><a href="#">January 2021</a></li>
+                  <li><a href="#">December 2020</a></li>
+                  <li><a href="#">November 2020</a></li>
+                  <li><a href="#">October 2020</a></li>
                 </ul>
                 <!-- /.circled -->
 
@@ -362,7 +372,11 @@
     <!-- ============================================================= SECTION – BLOG POST : END ============================================================= -->
   </div>
 </template>
-
+<style>
+li .btn {
+  margin: 0px;
+}
+</style>
 <script>
 import axios from "axios";
 import Vue2Filters from "vue2-filters";
@@ -422,7 +436,7 @@ export default {
         console.log(post);
         console.log(response.data);
         post.claps += 1;
-        // this.$parent.flashMessage = "Clap added!";
+        this.$parent.flashMessage = "Clap added!";
       });
     },
     createComment: function(post) {
@@ -437,8 +451,8 @@ export default {
         .then(response => {
           console.log(response.data);
           this.$parent.flashMessage = "Comment created!";
-          // this.post.comments.push(response.data);
-          // console.log(this.post.comments);
+          this.post.comments.push(response.data);
+          console.log(this.post.comments);
           console.log(post);
         })
         .catch(error => {
