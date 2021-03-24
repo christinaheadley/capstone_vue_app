@@ -148,15 +148,9 @@
                         class="form-control"
                         placeholder="Type search term to view GIFs"
                       />
-                      <button
-                        class="btn btn-navy"
-                        v-if="gifSearchTerm"
-                        href="#modal-work03"
-                        data-toggle="modal"
-                        v-on:click="viewGifs()"
-                      >
-                        Select GIF
-                      </button>
+                      <a v-if="gifSearchTerm" href="#modal-work03" data-toggle="modal" v-on:click="viewGifs()">
+                        <u><b class="navy">See GIFs</b></u>
+                      </a>
                       &nbsp;
                       <img src="/assets/images/giphy.png" class="" alt="GIPHY attribution for GIFs" />
                       <p></p>
@@ -305,6 +299,9 @@ export default {
           this.$parent.flashMessage = "Comment created!";
           this.post.comments.push(response.data);
           console.log(this.post.comments);
+          this.body = "";
+          this.imageUrl = "";
+          this.gifUrl = "";
         })
         .catch(error => {
           this.errors = error.response.data.errors;

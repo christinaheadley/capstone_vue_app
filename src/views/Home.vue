@@ -205,7 +205,7 @@
                           type="text"
                           name="message"
                           class="form-control"
-                          v-model="body"
+                          v-model.trim="body"
                           placeholder="Enter your comment ..."
                         />
                       </div>
@@ -217,7 +217,7 @@
                         <input
                           type="text"
                           class="form-control"
-                          v-model="imageUrl"
+                          v-model.trim="imageUrl"
                           placeholder="Enter an image... (optional)"
                         />
                       </div>
@@ -228,19 +228,14 @@
                       <div class="col-md-12">
                         <input
                           type="text"
-                          v-model="gifSearchTerm"
+                          v-model.trim="gifSearchTerm"
                           class="form-control"
                           placeholder="Type search term to view GIFs"
                         />
-                        <button
-                          class="btn btn-navy"
-                          v-if="gifSearchTerm"
-                          href="#modal-work03"
-                          data-toggle="modal"
-                          v-on:click="viewGifs()"
-                        >
-                          Select GIF
-                        </button>
+                        <a v-if="gifSearchTerm" href="#modal-work03" data-toggle="modal" v-on:click="viewGifs()">
+                          <u><b class="navy">See GIFs</b></u>
+                        </a>
+
                         &nbsp;
                         <img src="/assets/images/giphy.png" class="" alt="GIPHY attribution for GIFs" />
                         <p></p>
@@ -329,7 +324,7 @@
                 <h4>Search Posts</h4>
 
                 <form id="search" class="navbar-form search" role="search">
-                  <input type="search" v-model="filter" class="form-control" placeholder="Type to search" />
+                  <input type="search" v-model.lazy="filter" class="form-control" placeholder="Type to search" />
                   <button type="submit" class="btn btn-submit btn-navy icon-right-open"></button>
                 </form>
               </div>
@@ -381,6 +376,9 @@
 <style>
 li .btn {
   margin: 0px;
+}
+u {
+  font-size: 24px;
 }
 </style>
 <script>
@@ -459,6 +457,9 @@ export default {
           this.$parent.flashMessage = "Comment created!";
           this.post.comments.push(response.data);
           console.log(this.post.comments);
+          this.body = "";
+          this.imageUrl = "";
+          this.gifUrl = "";
         })
         .catch(error => {
           this.errors = error.response.data.errors;
