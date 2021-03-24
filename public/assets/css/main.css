@@ -335,6 +335,7 @@ main header + * {
 .inner {
   padding-top: 120px;
   padding-bottom: 120px;
+  /* margin-bottom: 0px; */
 }
 .inner-md {
   padding-top: 100px;
@@ -3993,7 +3994,8 @@ input:focus:-ms-input-placeholder {
   border: 1px solid #e6e9ed;
   border-bottom-width: 2px;
   border-radius: 3px;
-  margin-bottom: 40px;
+  /* margin-bottom: 40px; */
+  margin-bottom: 20px;
 }
 .sidemeta .format-wrapper a {
   display: table-cell;
@@ -4402,9 +4404,11 @@ input:focus:-ms-input-placeholder {
 #comments .commentbody {
   padding-left: 22px;
   overflow: hidden;
+  float: right;
 }
 #comments .author {
   margin-bottom: 15px;
+  /* width: 120px; */
 }
 #comments .author h3 {
   display: inline-block;
@@ -5109,6 +5113,7 @@ input:focus:-ms-input-placeholder {
   .classic-blog .pagination,
   .classic-blog .comment-form-wrapper {
     margin-bottom: 120px;
+    /* margin-bottom: 0px; */
   }
   .classic-blog.no-sidebar .pagination,
   .classic-blog.no-sidebar .comment-form-wrapper {
@@ -5720,6 +5725,7 @@ input:focus:-ms-input-placeholder {
   }
   #comments .commentbody {
     padding-left: 0;
+    float: right;
   }
   #comments .commentlist .children {
     padding-left: 0;

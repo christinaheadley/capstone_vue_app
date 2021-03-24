@@ -11,15 +11,18 @@
           <!-- /.col -->
 
           <div class="col-md-6 inner-top-xs inner-left-xs">
-            <h1>{{ user.user_name }}</h1>
-            <h4>{{ user.bio }}</h4>
-            <h3>{{ user.location }}</h3>
+            <h1 class="gray">{{ user.user_name }}</h1>
+            <h3 class="gray">{{ user.location }}</h3>
+            <p></p>
+            <p>
+              {{ user.bio }}
+            </p>
             <div v-if="user.id == $parent.getUserId()">
               <router-link :to="`/users/${user.id}/edit`">
-                <button class="btn btn-gray">Edit Profile</button>
+                <button class="btn col-lg-12 btn-gray">Edit Profile</button>
               </router-link>
-              &nbsp;
-              <button class="btn btn-gray" v-on:click="destroyUser()">Delete</button>
+              <!-- &nbsp;
+              <button class="btn btn-gray" v-on:click="destroyUser()">Delete</button> -->
             </div>
           </div>
           <!-- /.col -->

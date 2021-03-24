@@ -123,7 +123,7 @@
                   <figure>
                     <div class="author-image icon-overlay icn-link">
                       <router-link :to="`/users/${post.user.id}`">
-                        <img v-bind:src="post.user.image_url" class="" alt="" />
+                        <img :src="post.user.image_url" class="" alt="" />
                       </router-link>
                     </div>
 
@@ -152,31 +152,39 @@
                   <h2>Top Comment</h2>
                   <ol class="commentlist">
                     <li class="comment">
-                      <div
-                        class="avatar icon-overlay icn-link"
-                        img
-                        v-bind:src="post.comment.user.image_url"
-                        alt=""
-                      ></div>
-                      <!-- /.avatar -->
+                      <div v-if="post.comment.user.image_url">
+                        <div class="avatar icon-overlay .icn-link">
+                          <img :src="post.comment.user.image_url" alt="" />
+                        </div>
+                      </div>
+                      <div class="author col-sm-3">
+                        <h4 class="col-sm-3">by {{ post.comment.user.user_name }}</h4>
+                        <!-- <p v-if="post.comment.user.image_url"><img :src="post.comment.user.image_url" alt="" /></p> -->
 
-                      <div class="commentbody">
+                        <div class="meta">
+                          <span class="date">{{ relativeDate(post.comment.created_at) }}</span>
+                        </div>
+                        <!-- /.meta -->
+
+                        <!-- /.author -->
+                      </div>
+                      <!-- /.avatar -->
+                      <!-- <li class="comment">
+											<div class="avatar icon-overlay icn-link">
+												<a href="#"><img src="assets/images/art/human02.jpg" alt=""></a>
+											</div>/.avatar -->
+
+                      <!-- <div class="commentbody col-sm-6"> -->
+                      <figcaption class="author-details">
                         <p>
                           {{ post.comment.body }}
                         </p>
                         <p v-if="post.comment.image_url"><img :src="post.comment.image_url" alt="" /></p>
                         <p v-if="post.comment.gif_url"><img :src="post.comment.gif_url" alt="" /></p>
-                        <div class="author">
-                          <h4>by {{ post.comment.user.user_name }}</h4>
-                          <div class="meta">
-                            <span class="date">{{ relativeDate(post.comment.created_at) }}</span>
-                          </div>
-                          <!-- /.meta -->
-                        </div>
-                        <!-- /.author -->
 
                         <!-- /.message -->
-                      </div>
+                      </figcaption>
+                      <!-- </div> -->
                       <!-- /.commentbody -->
                     </li>
                     <!-- /.comment -->
@@ -307,11 +315,18 @@
   </div>
 </template>
 <style>
+img {
+  object-fit: cover;
+}
 li .btn {
   margin: 0px;
 }
 u {
   font-size: 24px;
+}
+/* .home.light-bg.inner-bottom  */
+main header .home .inner-bottom {
+  padding-bottom: 0px;
 }
 </style>
 <script>

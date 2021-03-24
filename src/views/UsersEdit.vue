@@ -6,7 +6,7 @@
       <div class="container inner-md">
         <div class="row">
           <div class="col-md-6 inner-top inner-right-xs inner-bottom-xs">
-            <figure><img v-bind:src="user.image_url" class="" alt="" /></figure>
+            <img v-bind:src="user.image_url" class="" alt="" />
           </div>
           <!-- /.col -->
           <div class="col-lg-6 inner-right-xs inner-bottom-xs">
@@ -46,8 +46,8 @@
                 <label>Image:</label>
                 <input type="text" autocomplete="on" class="form-control" v-model="user.image_url" />
               </div>
-              <input type="submit" class="btn btn-green" value="Submit" />
-              <button v-on:click="destroyUser(user)" class="btn btn-large btn-red align-center">
+              <input type="submit" class="btn btn-large btn-green" value="Submit" />
+              <button v-on:click="destroyUser(user)" class="btn  col-md-12 btn-large btn-red align-center">
                 Delete Account
               </button>
             </form>
@@ -86,11 +86,11 @@ export default {
   methods: {
     updateUser: function(user) {
       let params = {
-        user_name: user.userName,
+        user_name: user.user_name,
         body: user.body,
-        image_url: user.imageUrl,
+        image_url: user.image_url,
         password: user.password,
-        password_confirmation: user.passwordConfirmation,
+        password_confirmation: user.password_confirmation,
         bio: user.bio,
         location: user.location,
       };

@@ -11,7 +11,7 @@
               <!-- /.panel-group -->
 
               <div class="comment-form-wrapper">
-                <h2>Add New Post</h2>
+                <h2 class="navy">New Post</h2>
 
                 <form v-on:submit.prevent="createPost()" id="commentform" class="forms" action="" method="post">
                   <div class="row">
@@ -100,6 +100,17 @@
   </div>
 </template>
 
+<style>
+label h6 {
+  margin: auto;
+  padding-left: 12px;
+}
+.input-group-text .form-control {
+  width: 27.95px;
+  height: 42.5px;
+  background-color: aquamarine;
+}
+</style>
 <script>
 import axios from "axios";
 
