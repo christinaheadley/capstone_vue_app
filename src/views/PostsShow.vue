@@ -159,6 +159,7 @@
                       </button>
                       &nbsp;
                       <img src="/assets/images/giphy.png" class="" alt="GIPHY attribution for GIFs" />
+                      <p></p>
                     </div>
                     <!-- /.col -->
                   </div>
@@ -193,7 +194,7 @@
       <div class="modal-dialog modal-md">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title" id="modal-work03">Medium modal</h4>
+            <h4 class="modal-title" id="modal-work03">GIPHY Search</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true"><i class="icon-cancel-1"></i></span>
             </button>

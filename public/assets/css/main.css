@@ -43,11 +43,13 @@ iframe {
   margin-bottom: 0 !important;
 }
 ::selection {
-  background: #aaf2e4; /* Safari */
+  /* background: #aaf2e4; Safari */
+  background: #506a85
   color: #506a85;
 }
 ::-moz-selection {
-  background: #aaf2e4; /* Firefox */
+  /* background: #aaf2e4; Firefox */
+  background: #506a85;
   color: #506a85;
 }
 .animate {
@@ -112,7 +114,8 @@ a {
 }
 a:hover,
 a:focus {
-  color: #1abb9c;
+  /* color: #1abb9c; */
+  color: #506a85;
   text-decoration: none;
 }
 h1,
@@ -166,6 +169,7 @@ a:hover .logo {
 }
 a.green:hover {
   background: #1abb9c !important;
+  
 }
 a.blue:hover {
   background: #3f8dbf !important;
@@ -1050,6 +1054,7 @@ footer p {
 .meta a:hover,
 .more:hover {
   color: #1abb9c;
+  
 }
 .meta.tags a:before {
   content: "#";
@@ -1069,6 +1074,7 @@ footer p {
 .bordered .info h3 a:hover,
 .bordered .info h4 a:hover {
   color: #1abb9c;
+  
 }
 .bordered .info p {
   font-size: 14px;
@@ -1482,6 +1488,7 @@ aside .thumb figure {
   background-color: #f5f7fa;
   border-color: #e6e9ed;
   color: #1abb9c;
+ 
 }
 .navbar .dropdown-menu {
   padding: 0;
@@ -1527,6 +1534,7 @@ aside .thumb figure {
   filter: none;
   background-color: #f5f7fa;
   color: #1abb9c;
+  
 }
 .navbar .nav .open > a,
 .navbar .nav .open > a:hover,
@@ -2195,7 +2203,8 @@ p .btn {
 .tabs-top .tab a:hover {
   background: #1abb9c;
   color: #fff;
-  border-color: #1abb9c;
+  /* border-color: #1abb9c; */
+  border-color: #34495e;
 }
 .tabs-top .tab.active {
   z-index: 2;

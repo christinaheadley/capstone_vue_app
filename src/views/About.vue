@@ -6,17 +6,21 @@
           <!-- ============================================================= SIDE NAVIGATION ============================================================= -->
           <h3 class="sidelines text-left"><span></span></h3>
 
-          <blockquote>
+          <quote>
             <p>
-              Recent studies found that social isolation significantly increased a person's risk of premature death from
-              all causes, a risk that may rival those of smoking, obesity, and physical inactivity.
+              <i>
+                Recent studies found that social isolation significantly increased a person's risk of premature death
+                from all causes, a risk that may rival those of smoking, obesity, and physical inactivity.
+              </i>
             </p>
+            <p></p>
+            <p class="sidelines text-left"></p>
             <footer
               cite="https://www.cdc.gov/aging/publications/features/lonely-older-adults.html#:~:text=Health%20Risks%20of%20Loneliness&text=Recent%20studies%20found%20that%3A,percent%20increased%20risk%20of%20dementia."
             >
-              CDC
+              CENTERS FOR DISEASE CONTROL AND PREVENTION
             </footer>
-          </blockquote>
+          </quote>
           <!-- <ul class="sidenav">
             <li><a href="#">Home</a></li>
             <li><a href="#">Portfolio</a></li>
@@ -50,10 +54,11 @@
           <section id="content" class="border-top-lg">
             <div class="row">
               <div class="col-lg-12">
+                <p></p>
                 <p>
-                  Isolation and distancing have been part of our lives whether we wanted to or not. Fear of infection
-                  from strangers isn’t just for germaphobes anymore. Like a divorcée trying a dating app, we may find
-                  our social skills are a bit rusty!
+                  Isolation and distancing have become part of our everyday lives, whether they were welcome or not.
+                  Fear of infection from strangers isn’t just for germaphobes anymore. Like a divorcée on a dating app,
+                  we may find our social skills are a bit rusty!
                 </p>
                 <p>
                   The goal of this site is to help us, wherever we may be, work towards safe and intentional social
@@ -65,10 +70,10 @@
                   your fears, suggestions, and successes. All of you is welcome here!
                 </p>
 
-                <p>According to the CDC, Immigrants, pueer people, and older people are at higher risk of lonliness.</p>
+                <p>According to the CDC, Immigrants, queer people, and older people are at higher risk of lonliness.</p>
 
                 <figure>
-                  <img src="/assets/images/social_recoverwe_logo.png" alt="" />
+                  <img src="/assets/images/logo_whitespace.png" alt="" />
                 </figure>
 
                 <a href="contact.html" class="btn btn-large">Get in touch</a>

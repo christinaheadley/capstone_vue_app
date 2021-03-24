@@ -85,9 +85,12 @@
     <!-- ============================================================= MAIN ============================================================= -->
 
     <main>
-      <div v-if="flashMessage">
+      <div v-if="flashMessage" class="alert alert-info" role="alert">
         {{ flashMessage }}
-        <button v-on:click="flashMessage = ''">Close</button>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <!-- <button v-on:click="flashMessage = ''">Close</button> -->
       </div>
       <!-- Vue templates injected here -->
       <router-view :key="$route.fullPath" />
@@ -103,7 +106,7 @@
           <div class="col-lg-6  col-md-6 inner">
             <h4>Our Mission</h4>
             <a href="index.html">
-              <img class="logo img-intext" src="/assets/images/social_recoverwe_logo.png" alt="" />
+              <img class="logo img-intext" src="/assets/images/logo_whitespace.png" alt="" />
             </a>
             <p>
               Social RecoverWe uses peer support to help people with pandemic-induced anxiety.

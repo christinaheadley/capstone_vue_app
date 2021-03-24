@@ -26,7 +26,7 @@
             <ul class="format-filter text-center">
               <li>
                 <button
-                  class="btn btn-large btn-green"
+                  class="btn btn-large btn-navy"
                   v-on:click="
                     sortAttribute = 'created_at';
                     sortOrder = -1;
@@ -37,7 +37,7 @@
                 &nbsp;
 
                 <button
-                  class="btn btn-large btn-green"
+                  class="btn btn-large btn-navy"
                   v-on:click="
                     sortAttribute = 'claps';
                     sortOrder = -1;
@@ -61,9 +61,9 @@
           <div class="row">
             <div class="col-lg-9 inner-right-sm inner-left-sm">
               <div class="posts sidemeta">
-                <div class="post format-gallery">
+                <div class="post format-gallery ">
                   <div class="date-wrapper">
-                    <div class="date">
+                    <div class="date  navy-bg">
                       <span class="month">{{ dayOfTheWeek(post.created_at) }}</span>
                       <span class="day">{{ formattedDay(post.created_at) }}</span>
                       <span class="month">{{ formattedMonth(post.created_at) }}</span>
@@ -187,9 +187,14 @@
 
                 <div class="comment-form-wrapper">
                   <div v-if="!$parent.isLoggedIn()">
-                    <p>
-                      <router-link to="/login">Please log in to leave a comment!</router-link>
+                    <p class="navy">
+                      Please
+                      <b>
+                        <router-link to="/login">log in</router-link>
+                      </b>
+                      to leave a comment!
                     </p>
+                    <p></p>
                   </div>
                   <h2>Leave a Comment</h2>
 
@@ -238,12 +243,13 @@
                         </button>
                         &nbsp;
                         <img src="/assets/images/giphy.png" class="" alt="GIPHY attribution for GIFs" />
+                        <p></p>
                       </div>
                       <!-- /.col -->
                     </div>
                     <!-- /.row -->
 
-                    <button type="submit" class="btn btn-submit">
+                    <button type="submit" class="btn btn-navy btn-submit">
                       Submit comment
                     </button>
                   </form>
@@ -264,7 +270,7 @@
                   <div class="modal-dialog modal-md">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h4 class="modal-title" id="modal-work03">Medium modal</h4>
+                        <h4 class="modal-title" id="modal-work03">GIPHY Search</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true"><i class="icon-cancel-1"></i></span>
                         </button>
@@ -324,7 +330,7 @@
 
                 <form id="search" class="navbar-form search" role="search">
                   <input type="search" v-model="filter" class="form-control" placeholder="Type to search" />
-                  <button type="submit" class="btn btn-submit icon-right-open"></button>
+                  <button type="submit" class="btn btn-submit btn-navy icon-right-open"></button>
                 </form>
               </div>
               <!-- /.widget -->
@@ -338,7 +344,7 @@
                 <ul v-for="tag in tags" v-bind="tag.name" :key="tag.name">
                   <li id="tag.name" name="tag" value="tag.name">
                     <!-- <a v-bind:[tag]="filter">{{ tag.name }}</a> -->
-                    <button class="btn btn-grn" v-on:click="setFilterAttribute(tag.name)">{{ tag.name }}</button>
+                    <button class="btn btn-navy" v-on:click="setFilterAttribute(tag.name)">{{ tag.name }}</button>
                   </li>
                 </ul>
                 <!-- /.circled -->
@@ -444,7 +450,7 @@ export default {
         body: this.body,
         image_url: this.imageUrl,
         gif_url: this.gifUrl,
-        post_id: this.post.id,
+        post_id: post.id,
       };
       axios
         .post("/api/comments", params)
@@ -453,7 +459,6 @@ export default {
           this.$parent.flashMessage = "Comment created!";
           this.post.comments.push(response.data);
           console.log(this.post.comments);
-          console.log(post);
         })
         .catch(error => {
           this.errors = error.response.data.errors;

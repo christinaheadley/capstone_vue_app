@@ -4,10 +4,10 @@
 
     <section id="work-samples" class="dark-bg">
       <div class="container inner-md">
-        <div class="row">
+        <div class="row gray">
           <div class="col-lg-6 inner-right-xs inner-bottom-xs">
             <form v-on:submit.prevent="submit()">
-              <h1>Login</h1>
+              <h1 class="gray">Login</h1>
               <ul>
                 <li class="text-danger" v-for="error in errors" v-bind:key="error">
                   {{ error }}
@@ -21,7 +21,7 @@
                 <label>Password:</label>
                 <input type="password" class="form-control" v-model="password" />
               </div>
-              <input type="submit" class="btn btn-primary" value="Submit" />
+              <input type="submit" class="btn btn-gray btn-primary" value="Submit" />
             </form>
           </div>
           <!-- /.col -->
