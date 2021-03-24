@@ -10,7 +10,7 @@
           </div>
           <!-- /.col -->
 
-          <div class="col-md-6 inner-top-xs inner-left-xs">
+          <div class="col-md-4 inner-top-xs inner-left-xs">
             <h1 class="gray">{{ user.user_name }}</h1>
             <h3 class="gray">{{ user.location }}</h3>
             <p></p>

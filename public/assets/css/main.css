@@ -4404,7 +4404,6 @@ input:focus:-ms-input-placeholder {
 #comments .commentbody {
   padding-left: 22px;
   overflow: hidden;
-  float: right;
 }
 #comments .author {
   margin-bottom: 15px;

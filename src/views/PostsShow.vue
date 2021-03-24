@@ -30,7 +30,7 @@
                     </router-link>
                   </p>
 
-                  <h1 class="post-title">{{ post.title }}</h1>
+                  <h2 class="post-title">{{ post.title }}</h2>
 
                   <ul class="meta">
                     <li class="categories">
@@ -46,26 +46,33 @@
                   <!-- /.meta -->
 
                   <p>{{ post.body }}</p>
+                  <div v-if="post.user_id == $parent.getUserId()">
+                    <router-link :to="`/posts/${post.id}/edit`">
+                      <button class="btn btn-orange">Edit Post</button>
+                    </router-link>
+                    <!-- /.post-content -->
+                  </div>
                 </div>
-                <!-- /.post-content -->
               </div>
               <!-- /.post -->
 
               <div class="post-author">
                 <figure>
                   <div class="author-image icon-overlay icn-link">
-                    <a href="#"><img :src="post.user.image_url" alt="" /></a>
+                    <router-link :to="`/users/${post.user.id}`">
+                      <img :src="post.user.image_url" class="" alt="" />
+                    </router-link>
                   </div>
 
                   <figcaption class="author-details">
-                    <h3>About the author</h3>
-
+                    <h3>{{ post.user.user_name }}</h3>
                     <router-link :to="`/users/${post.user.id}`">
                       <p>
-                        {{ post.user.user_name }}
                         {{ post.user.bio }}
-                        {{ post.user.location }}
                       </p>
+
+                      <p></p>
+                      <p>{{ post.user.location }}</p>
                     </router-link>
                     <ul class="meta">
                       <li class="author-posts">

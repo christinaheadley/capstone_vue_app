@@ -105,15 +105,19 @@
                         <a href="#">{{ post.comments.length }}</a>
                       </li>
                     </ul>
-                    <figure>
+                    <figure v-if="post.image_url">
                       <img v-bind:src="post.image_url" class="" alt="" />
                     </figure>
-
                     <!-- /.meta -->
-
                     <p>
                       {{ post.body }}
                     </p>
+                    <div v-if="post.user_id == $parent.getUserId()">
+                      <router-link :to="`/posts/${post.id}/edit`">
+                        <button class="btn btn-orange">Edit Post</button>
+                      </router-link>
+                      <!-- <button class="btn-navy" v-on:click="destroyPost(post)">Delete</button> -->
+                    </div>
                   </div>
                   <!-- /.post-content -->
                 </div>
@@ -151,40 +155,33 @@
                 <div id="comments" v-if="post.comment">
                   <h2>Top Comment</h2>
                   <ol class="commentlist">
-                    <li class="comment">
-                      <div v-if="post.comment.user.image_url">
-                        <div class="avatar icon-overlay .icn-link">
-                          <img :src="post.comment.user.image_url" alt="" />
-                        </div>
-                      </div>
-                      <div class="author col-sm-3">
-                        <h4 class="col-sm-3">by {{ post.comment.user.user_name }}</h4>
-                        <!-- <p v-if="post.comment.user.image_url"><img :src="post.comment.user.image_url" alt="" /></p> -->
-
-                        <div class="meta">
-                          <span class="date">{{ relativeDate(post.comment.created_at) }}</span>
-                        </div>
-                        <!-- /.meta -->
-
-                        <!-- /.author -->
+                    <li class="comment" v-if="post.comment.user.image_url">
+                      <div class="avatar icon-overlay icn-link">
+                        <img :src="post.comment.user.image_url" alt="" />
                       </div>
                       <!-- /.avatar -->
-                      <!-- <li class="comment">
-											<div class="avatar icon-overlay icn-link">
-												<a href="#"><img src="assets/images/art/human02.jpg" alt=""></a>
-											</div>/.avatar -->
 
-                      <!-- <div class="commentbody col-sm-6"> -->
-                      <figcaption class="author-details">
-                        <p>
-                          {{ post.comment.body }}
-                        </p>
-                        <p v-if="post.comment.image_url"><img :src="post.comment.image_url" alt="" /></p>
-                        <p v-if="post.comment.gif_url"><img :src="post.comment.gif_url" alt="" /></p>
+                      <div class="commentbody">
+                        <div class="author">
+                          <h3>
+                            <a href="#">{{ post.comment.user.user_name }}</a>
+                          </h3>
+                          <div class="meta">
+                            <span class="date">{{ relativeDate(post.comment.created_at) }}</span>
+                          </div>
+                          <!-- /.meta -->
+                        </div>
+                        <!-- /.author -->
 
+                        <div class="message">
+                          <p>
+                            {{ post.comment.body }}
+                          </p>
+                          <p v-if="post.comment.image_url"><img :src="post.comment.image_url" alt="" /></p>
+                          <p v-if="post.comment.gif_url"><img :src="post.comment.gif_url" alt="" /></p>
+                        </div>
                         <!-- /.message -->
-                      </figcaption>
-                      <!-- </div> -->
+                      </div>
                       <!-- /.commentbody -->
                     </li>
                     <!-- /.comment -->
@@ -324,6 +321,9 @@ li .btn {
 u {
   font-size: 24px;
 }
+/* .sidebox ul {
+  padding-left: 0px;
+} */
 /* .home.light-bg.inner-bottom  */
 main header .home .inner-bottom {
   padding-bottom: 0px;
