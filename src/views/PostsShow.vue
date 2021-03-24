@@ -50,6 +50,7 @@
                     <router-link :to="`/posts/${post.id}/edit`">
                       <button class="btn btn-orange">Edit Post</button>
                     </router-link>
+
                     <!-- /.post-content -->
                   </div>
                 </div>
@@ -100,7 +101,7 @@
                           <a href="#">{{ comment.user.user_name }}</a>
                         </h3>
                         <div class="meta">
-                          <span class="date">{{ comment.created_at }}</span>
+                          <span class="date">{{ relativeDate(comment.created_at) }}</span>
                         </div>
                         <!-- /.meta -->
                       </div>

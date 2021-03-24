@@ -90,8 +90,9 @@
                   </div>
 
                   <button type="submit" class="btn btn-submit">Submit Post</button>
+                  &nbsp;
+                  <button type="submit" class="btn btn-red btn-submit" v-on:click="destroyPost()">Delete</button>
                 </form>
-
                 <div id="response"></div>
               </div>
               <!-- /.comment-form-wrapper -->
@@ -155,13 +156,22 @@ export default {
         .then(response => {
           console.log(response.data);
           this.$router.push(`/posts/${this.post.id}`);
-          // this.$parent.flashMessage = "Post created!";
+          this.$parent.flashMessage = "Post created!";
           //flash message and unshift not working
         })
         .catch(error => {
           this.errors = error.response.data.errors;
           this.status = error.response.status;
         });
+    },
+    destroyPost: function() {
+      if (confirm("Do you want to delete this post?")) {
+        axios.delete(`api/posts/${this.post.id}`).then(response => {
+          console.log(response.data);
+          this.$parent.flashMessage = "Post successfully deleted!";
+          this.$router.push("/");
+        });
+      }
     },
     indexTags: function() {
       axios.get("/api/tags").then(response => (this.tags = response.data));
