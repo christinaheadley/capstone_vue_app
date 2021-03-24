@@ -115,6 +115,17 @@
                         <p v-if="comment.gif_url"><img :src="comment.gif_url" alt="" /></p>
                       </div>
                       <!-- /.message -->
+                      <div class="col-md-6 inner-top">
+                        <button
+                          type="button"
+                          class="btn btn-large btn-block btn-orange btn-modal"
+                          data-toggle="modal"
+                          href="#modal-contact01"
+                        >
+                          Edit Comment
+                        </button>
+                      </div>
+                      <!-- /.col -->
                     </div>
                     <!-- /.commentbody -->
                   </li>
@@ -123,6 +134,111 @@
                 <!-- /.commentlist -->
               </div>
               <!-- /#comments -->
+              <!-- ============================================================= MODAL CONTACT01 ============================================================= -->
+
+              <div
+                class="modal fade"
+                id="modal-contact01"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="modal-contact01"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog modal-sm">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="modal-contact01">Edit</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="icon-cancel-1"></i></span>
+                      </button>
+                    </div>
+                    <!-- /.modal-header -->
+
+                    <!-- ============================================================= MODAL CONTENT ============================================================= -->
+
+                    <div class="modal-body">
+                      <!-- ============================================================= SECTION – CONTACT FORM ============================================================= -->
+
+                      <section id="contact-form">
+                        <div class="container inner-xs">
+                          <div class="row">
+                            <div class="col-12 inner-bottom-xs">
+                              <h2>Edit Comment</h2>
+
+                              <form
+                                v-on:submit.prevent="updateComment()"
+                                id="contactform"
+                                class="forms"
+                                action="contact.php"
+                                method="post"
+                              >
+                                <div class="row">
+                                  <div class="col-md-6">
+                                    <input
+                                      v-model="comment.body"
+                                      type="text"
+                                      name="text"
+                                      class="form-control"
+                                      placeholder="Comment Text (Required)"
+                                    />
+                                  </div>
+                                  <!-- /.col -->
+
+                                  <div class="col-md-6">
+                                    <input
+                                      v-model="comment.image_url"
+                                      type="text"
+                                      name="text"
+                                      class="form-control"
+                                      placeholder="Edit picture"
+                                    />
+                                  </div>
+                                  <!-- /.col -->
+                                </div>
+                                <!-- /.row -->
+
+                                <div class="row">
+                                  <div class="col-12">
+                                    <input
+                                      v-model="comment.gif_url"
+                                      name="text"
+                                      class="form-control"
+                                      placeholder="Edit GIF"
+                                    />
+                                  </div>
+                                  <!-- /.col -->
+                                </div>
+                                <!-- /.row -->
+
+                                <button type="submit" class="btn btn-submit">Submit message</button>
+                              </form>
+
+                              <div id="response"></div>
+                            </div>
+                            <!-- ./col -->
+                          </div>
+                          <!-- /.row -->
+                        </div>
+                        <!-- /.container -->
+                      </section>
+                    </div>
+                    <!-- ============================================================= SECTION – CONTACT FORM : END ============================================================= -->
+                    <!-- /.modal-body -->
+
+                    <!-- ============================================================= MODAL CONTENT : END ============================================================= -->
+
+                    <div class="modal-footer">
+                      <button type="button" class="btn" data-dismiss="modal">Close</button>
+                    </div>
+                    <!-- /.modal-footer -->
+                  </div>
+                  <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+              </div>
+              <!-- /.modal -->
+
+              <!-- ============================================================= MODAL CONTACT01 : END ============================================================= -->
 
               <div class="comment-form-wrapper">
                 <h2>Leave a Comment</h2>
@@ -262,6 +378,7 @@
 <script>
 import axios from "axios";
 import moment from "moment";
+// import func from "vue-editor-bridge";
 
 export default {
   data: function() {
@@ -315,6 +432,18 @@ export default {
           this.errors = error.response.data.errors;
           this.status = error.response.status;
         });
+    },
+    updateComment: function() {
+      let params = {
+        body: this.comment.body,
+        image_url: this.comment.imageUrl,
+        gif_url: this.comment.gifUrl,
+        post_id: this.comment.post.id,
+      };
+      axios.patch(`api/comments/${this.comment.id}`, params).then(response => {
+        console.log(response.data);
+        console.log(this.comment);
+      });
     },
     addClap: function() {
       let params = {
