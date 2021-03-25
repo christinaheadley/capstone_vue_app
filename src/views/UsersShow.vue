@@ -12,6 +12,7 @@
 
           <div class="col-md-4 inner-top-xs inner-left-xs">
             <h1 class="gray">{{ user.user_name }}</h1>
+            <p v-if="user.id == $parent.getUserId()">{{ user.email }}</p>
             <h3 class="gray">{{ user.location }}</h3>
             <p></p>
             <p>
@@ -44,8 +45,10 @@
 
 <style>
 img {
-  max-width: 60%;
+  max-width: 80%;
   height: auto;
+}
+figure img {
 }
 </style>
 
