@@ -20,7 +20,7 @@
     <!-- ============================================================= SECTION – BLOG POST ============================================================= -->
 
     <section id="blog-post" class="light-bg">
-      <div class="container inner-top-sm inner-bottom classic-blog">
+      <div class="container inner-top-sm inner-bottom-home classic-blog">
         <div class="row">
           <div class="col-md-12">
             <ul class="format-filter text-center">
@@ -56,7 +56,7 @@
         <div
           v-for="post in orderBy(filterBy(posts, filter), sortAttribute, sortOrder)"
           v-bind:key="post.id"
-          class="container inner-top-sm inner-bottom classic-blog"
+          class="container inner-top-sm inner-bottom-home classic-blog"
         >
           <div class="row">
             <div class="col-lg-9 inner-right-sm inner-left-sm">
@@ -132,8 +132,8 @@
                     </div>
 
                     <figcaption class="author-details">
-                      <h3>{{ post.user.user_name }}</h3>
                       <router-link :to="`/users/${post.user.id}`">
+                        <h3>{{ post.user.user_name }}</h3>
                         <p>
                           {{ post.user.bio }}
                         </p>
@@ -157,14 +157,18 @@
                   <ol class="commentlist">
                     <li class="comment" v-if="post.comment.user.image_url">
                       <div class="avatar icon-overlay icn-link">
-                        <img :src="post.comment.user.image_url" alt="" />
+                        <router-link :to="`/users/${post.comment.user.id}`">
+                          <img :src="post.comment.user.image_url" alt="" />
+                        </router-link>
                       </div>
                       <!-- /.avatar -->
 
                       <div class="commentbody">
                         <div class="author">
                           <h3>
-                            <a href="#">{{ post.comment.user.user_name }}</a>
+                            <router-link :to="`/users/${post.comment.user.id}`">
+                              {{ post.comment.user.user_name }}
+                            </router-link>
                           </h3>
                           <div class="meta">
                             <span class="date">{{ relativeDate(post.comment.created_at) }}</span>
@@ -259,7 +263,7 @@
 
             <aside class="col-lg-3">
               <div class="sidebox widget">
-                <h4>Search Posts</h4>
+                <h4>Search</h4>
 
                 <form id="search" class="navbar-form search" role="search">
                   <input type="search" v-model.lazy="filter" class="form-control" placeholder="Type to search" />
@@ -325,7 +329,8 @@ u {
   padding-left: 0px;
 } */
 /* .home.light-bg.inner-bottom  */
-main header .home .inner-bottom {
+/* main header .home .inner-bottom  */
+.home #blog .container {
   padding-bottom: 0px;
 }
 </style>
@@ -388,7 +393,7 @@ export default {
         console.log(post);
         console.log(response.data);
         post.claps += 1;
-        this.$parent.flashMessage = "Clap added!";
+        this.$parent.flashMessage = "Post liked!";
       });
     },
     createComment: function(post) {

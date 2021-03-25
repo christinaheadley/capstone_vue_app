@@ -361,6 +361,9 @@ main header + * {
 .inner-top-xs {
   padding-top: 40px;
 }
+.inner-bottom-home {
+  padding-bottom: 0px;
+}
 .inner-bottom {
   padding-bottom: 120px;
 }

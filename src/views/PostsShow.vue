@@ -66,8 +66,8 @@
                   </div>
 
                   <figcaption class="author-details">
-                    <h3>{{ post.user.user_name }}</h3>
                     <router-link :to="`/users/${post.user.id}`">
+                      <h3>{{ post.user.user_name }}</h3>
                       <p>
                         {{ post.user.bio }}
                       </p>
@@ -91,14 +91,16 @@
                 <ol class="commentlist">
                   <li class="comment" v-for="comment in post.comments" v-bind:key="comment.id">
                     <div class="avatar icon-overlay icn-link">
-                      <a href="#"><img v-bind:src="comment.user.image_url" alt="" /></a>
+                      <router-link :to="`/users/${comment.user.id}`">
+                        <img v-bind:src="comment.user.image_url" alt="" />
+                      </router-link>
                     </div>
                     <!-- /.avatar -->
 
                     <div class="commentbody">
                       <div class="author">
                         <h3>
-                          <a href="#">{{ comment.user.user_name }}</a>
+                          <router-link :to="`/users/${comment.user.id}`">{{ comment.user.user_name }}</router-link>
                         </h3>
                         <div class="meta">
                           <span class="date">{{ relativeDate(comment.created_at) }}</span>

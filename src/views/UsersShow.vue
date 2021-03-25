@@ -47,9 +47,10 @@
 img {
   max-width: 80%;
   height: auto;
+  margin: auto;
 }
-figure img {
-}
+/* figure img {
+} */
 </style>
 
 <script>

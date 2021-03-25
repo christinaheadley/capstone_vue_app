@@ -127,10 +127,14 @@
               </li>
               <li>
                 <i class="icon-mobile contact"></i>
-                (510) 712-9493
+                <a href="tel: 5107129493">(510) 712-9493</a>
               </li>
               <li>
-                <a href="#">
+                <a
+                  href="mailto:chrstnaheadley@gmail.com?subject=Social RecoverWe"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <i class="icon-mail-1 contact"></i>
                   chrstnaheadley@gmail.com
                 </a>
@@ -146,7 +150,7 @@
 
       <div class="footer-bottom">
         <div class="container inner clearfix">
-          <p class="float-left">© 2019 REEN. All rights reserved.</p>
+          <p class="float-left">© Christina Headley. Theme by REEN. All rights reserved.</p>
           <ul class="footer-menu float-right">
             <li><router-link to="/">Home</router-link></li>
             <li><a href="portfolio.html">Portfolio</a></li>
