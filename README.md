@@ -1,4 +1,4 @@
-Social RecoverWe Social Media App and Discussion Forum
+***Social RecoverWe Social Media App and Discussion Forum***
 
 I created this project because we are social beings who needed to socially distance, and I wanted to help people be comfortable re-engaging without distance, when the time is right. 
 
