@@ -1,4 +1,4 @@
-***Social RecoverWe Social Media App and Discussion Forum***
+**Social RecoverWe Social Media App and Discussion Forum**
 
 I created this project because we are social beings who needed to socially distance, and I wanted to help people be comfortable re-engaging without distance, when the time is right. 
 
@@ -10,5 +10,6 @@ I drew my wireframes on paper and made an entity-relationship diagram with Lucid
 
 I stayed organized throught the project with Trello boards. I set milestones and tasks to be accomplished, and noted questions and nice-to-have features.
 
-After the planning, the programming:
+***After the planning, the programming:***
+
 I created an API backend with Ruby on Rails. I created my models with the already determined attributes and foreign keys. I made a route, controller method, and view for each item I selected in the planning process. Next came association methods, validation, and authorization.
